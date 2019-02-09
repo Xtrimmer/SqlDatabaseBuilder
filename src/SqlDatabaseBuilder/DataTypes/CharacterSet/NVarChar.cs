@@ -17,7 +17,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
             }
             else
             {
-                this.n = n;
+                N = n;
             }
         }
 
