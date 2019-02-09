@@ -43,9 +43,11 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
             get
             {
-                string s = Scale == DEFAULT_SCALE ? "" : $", {Scale}";
-                string ps = Precision == DEFAULT_PRECISION ? "" : $"({Precision}{s})";
-                return $"{TypeValue}{ps}";
+                string scaleDefinition = Scale == DEFAULT_SCALE ? "" : $", {Scale}";
+                string PrecisionAndScaleDefinition;
+                if (Precision == DEFAULT_PRECISION && scale == DEFAULT_SCALE) PrecisionAndScaleDefinition = "";
+                else PrecisionAndScaleDefinition = $"({precision}{scaleDefinition})";
+                return $"{TypeValue}{PrecisionAndScaleDefinition}";
             }
         }
 
