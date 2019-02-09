@@ -11,7 +11,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
             sqlConnection.ThrowIfNull(nameof(sqlConnection));
 
-            string sql = $"CREATE DATABASE [{Name}]";
+            string sql = $"CREATE {SqlDefinition}";
 
             using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
             {
@@ -24,12 +24,20 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
             sqlConnection.ThrowIfNull(nameof(sqlConnection));
 
-            string sql = $"DROP DATABASE [{Name}]";
+            string sql = $"DROP {SqlDefinition}";
 
             using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
             {
                 sqlCommand.CommandText = sql;
                 sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        internal override string SqlDefinition
+        {
+            get
+            {
+                return $"DATABASE [{Name}]";
             }
         }
     }

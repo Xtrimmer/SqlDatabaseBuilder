@@ -17,14 +17,9 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         public override void Create(SqlConnection sqlConnection)
         {
-            if (Columns.Count() == 0) throw new InvalidTableDefinitionException("Table must specify at least one attribute.");
-
-            string columnDefinitions = string.Join(", ", Columns.Select(c => c.CreateDefinition).ToList());
-            string sql = $"CREATE TABLE [{Name}] ({columnDefinitions})";
-
             using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
             {
-                sqlCommand.CommandText = sql;
+                sqlCommand.CommandText = SqlDefinition;
                 sqlCommand.ExecuteNonQuery();
             }
         }
@@ -37,6 +32,17 @@ namespace Xtrimmer.SqlDatabaseBuilder
             {
                 sqlCommand.CommandText = sql;
                 sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        internal override string SqlDefinition
+        {
+            get
+            {
+                if (Columns.Count() == 0) throw new InvalidTableDefinitionException("Table must specify at least one attribute.");
+
+                string columnDefinitions = string.Join(", ", Columns.Select(c => c.SqlDefinition).ToList());
+                return $"CREATE TABLE [{Name}] ({columnDefinitions})";
             }
         }
     }

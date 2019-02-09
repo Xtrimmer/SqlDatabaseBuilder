@@ -8,6 +8,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
     public abstract class DatabaseObject
     {
         private DatabaseIdentifier databaseIdentifier;
+
         public string Name
         {
             get => databaseIdentifier.Name;
@@ -18,5 +19,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
             Name = name;
         }
+
+        internal abstract string SqlDefinition {get;}
     }
 }
