@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Xtrimmer.SqlDatabaseBuilder
 {
     [Serializable]
-    internal class InvalidTableDefinitionException : Exception
+    public class InvalidTableDefinitionException : Exception
     {
         public InvalidTableDefinitionException()
         {
