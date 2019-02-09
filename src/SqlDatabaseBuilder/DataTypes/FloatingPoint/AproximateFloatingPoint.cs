@@ -12,7 +12,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         private int mantissa;
 
-        public int Mantissa
+        protected int Mantissa
         {
             get { return mantissa; }
             set
