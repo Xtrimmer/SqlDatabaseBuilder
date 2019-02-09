@@ -10,7 +10,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         internal Binary(int n)
         {
-            this.n = n;
+            N = n;
         }
 
         protected override string TypeValue => "binary";

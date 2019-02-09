@@ -10,7 +10,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         internal NChar(int n)
         {
-            this.n = n;
+            N = n;
         }
 
         protected override int MaxN => 4000;
