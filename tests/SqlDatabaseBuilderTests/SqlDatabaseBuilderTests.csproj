@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataSource\SqlDatabaseBuilder.csproj" />
+    <ProjectReference Include="..\..\src\SqlDatabaseBuilder\SqlDatabaseBuilder.csproj" />
   </ItemGroup>
 
 </Project>

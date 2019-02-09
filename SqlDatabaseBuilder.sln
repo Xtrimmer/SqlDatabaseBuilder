@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlDatabaseBuilder", "DataSource\SqlDatabaseBuilder.csproj", "{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlDatabaseBuilder", "src\SqlDatabaseBuilder\SqlDatabaseBuilder.csproj", "{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlDatabaseBuilderTests", "DataSourceTests\SqlDatabaseBuilderTests.csproj", "{CAFA451E-8FA1-4283-8119-B8A2B7469400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlDatabaseBuilderTests", "tests\SqlDatabaseBuilderTests\SqlDatabaseBuilderTests.csproj", "{CAFA451E-8FA1-4283-8119-B8A2B7469400}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F4A064F8-5FDE-4460-811E-D1313230384B}"
 EndProject
