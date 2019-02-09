@@ -4,21 +4,21 @@ using System.Runtime.Serialization;
 namespace Xtrimmer.SqlDatabaseBuilder
 {
     [Serializable]
-    internal class InvalidCharacterSetength : Exception
+    public class InvalidCharacterSetLength : Exception
     {
-        public InvalidCharacterSetength()
+        public InvalidCharacterSetLength()
         {
         }
 
-        public InvalidCharacterSetength(string message) : base(message)
+        public InvalidCharacterSetLength(string message) : base(message)
         {
         }
 
-        public InvalidCharacterSetength(string message, Exception innerException) : base(message, innerException)
+        public InvalidCharacterSetLength(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected InvalidCharacterSetength(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected InvalidCharacterSetLength(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

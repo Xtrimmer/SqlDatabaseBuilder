@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Xtrimmer.SqlDatabaseBuilder
 {
     [Serializable]
-    internal class InvalidMantissaException : Exception
+    public class InvalidMantissaException : Exception
     {
         public InvalidMantissaException()
         {

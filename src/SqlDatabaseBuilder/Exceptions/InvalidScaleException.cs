@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Xtrimmer.SqlDatabaseBuilder
 {
     [Serializable]
-    internal class InvalidScaleException : Exception
+    public class InvalidScaleException : Exception
     {
         public InvalidScaleException()
         {

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Xtrimmer.SqlDatabaseBuilder
 {
     [Serializable]
-    internal class InvalidPrecisionException : Exception
+    public class InvalidPrecisionException : Exception
     {
         public InvalidPrecisionException()
         {
