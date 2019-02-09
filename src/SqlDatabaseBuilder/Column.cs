@@ -16,13 +16,13 @@ namespace Xtrimmer.SqlDatabaseBuilder
             DataType = dataType;
         }
 
-        internal string CreateDefinition
+        internal override string SqlDefinition
         {
             get
             {
                 string nullDefinition = Nullable ? "" : "NOT NULL";
                 return $"[{Name}] {DataType.Definition} {nullDefinition}";
             }
-        } 
+        }
     }
 }
