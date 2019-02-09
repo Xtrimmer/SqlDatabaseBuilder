@@ -8,181 +8,41 @@ namespace Xtrimmer.SqlDatabaseBuilder
     {
         public const int MAX = -1;
 
-        public static DataType BigInt()
-        {
-            return new BigInt();
-        }
-
-        public static DataType Int()
-        {
-            return new Int();
-        }
-
-        public static DataType SmallInt()
-        {
-            return new SmallInt();
-        }
-
-        public static DataType TinyInt()
-        {
-            return new TinyInt();
-        }
-
-        public static DataType Bit()
-        {
-            return new Bit();
-        }
-
-        public static DataType Money()
-        {
-            return new Money();
-        }
-
-        public static DataType SmallMoney()
-        {
-            return new SmallMoney();
-        }
-
-        public static DataType Decimal()
-        {
-            return new Decimal();
-        }
-
-        public static DataType Decimal(int precision)
-        {
-            return new Decimal(precision);
-        }
-
-        public static DataType Decimal(int precision, int scale)
-        {
-            return new Decimal(precision, scale);
-        }
-
-        public static DataType Numeric()
-        {
-            return new Numeric();
-        }
-
-        public static DataType Numeric(int precision)
-        {
-            return new Numeric(precision);
-        }
-
-        public static DataType Numeric(int precision, int scale)
-        {
-            return new Numeric(precision, scale);
-        }
-
-        public static DataType Float()
-        {
-            return new Float();
-        }
-
-        public static DataType Float(int mantissa)
-        {
-            return new Float(mantissa);
-        }
-
-        public static DataType Real()
-        {
-            return new Real();
-        }
-
-        public static DataType VarChar()
-        {
-            return new VarChar();
-        }
-
-        public static DataType VarChar(int n)
-        {
-            return new VarChar(n);
-        }
-
-        public static DataType Char()
-        {
-            return new Char();
-        }
-
-        public static DataType Char(int n)
-        {
-            return new Char(n);
-        }
-    
-
-        public static DataType VarBinary()
-        {
-            return new VarBinary();
-        }
-
-        public static DataType VarBinary(int n)
-        {
-            return new VarBinary(n);
-        }
-
-        public static DataType Binary()
-        {
-            return new Binary();
-        }
-
-        public static DataType Binary(int n)
-        {
-            return new Binary(n);
-        }
-
-        public static DataType NVarChar()
-        {
-            return new NVarChar();
-        }
-
-        public static DataType NVarChar(int n)
-        {
-            return new NVarChar(n);
-        }
-
-        public static DataType NChar()
-        {
-            return new NChar();
-        }
-
-        public static DataType NChar(int n)
-        {
-            return new NChar(n);
-        }
-
-        public static DataType Date()
-        {
-            return new Date();
-        }
-
-        public static DataType DateTime()
-        {
-            return new DateTime();
-        }
-
-        public static DataType DateTime2()
-        {
-            return new DateTime2();
-        }
-
-        public static DataType DateTime2(int precision)
-        {
-            return new DateTime2(precision);
-        }
-
-        public static DataType Time()
-        {
-            return new Time();
-        }
-
-        public static DataType Time(int scale)
-        {
-            return new Time(scale);
-        }
-
-        public static DataType UniqueIdentifier()
-        {
-            return new UniqueIdentifier();
-        }
+        public static DataType BigInt() => new BigInt();
+        public static DataType Int() => new Int();
+        public static DataType SmallInt() => new SmallInt();
+        public static DataType TinyInt() => new TinyInt();
+        public static DataType Bit() => new Bit();
+        public static DataType Money() => new Money();
+        public static DataType SmallMoney() => new SmallMoney();
+        public static DataType Decimal() => new Decimal();
+        public static DataType Decimal(int precision) => new Decimal(precision);
+        public static DataType Decimal(int precision, int scale) => new Decimal(precision, scale);
+        public static DataType Numeric() => new Numeric();
+        public static DataType Numeric(int precision) => new Numeric(precision);
+        public static DataType Numeric(int precision, int scale) => new Numeric(precision, scale);
+        public static DataType Float() => new Float();
+        public static DataType Float(int mantissa) => new Float(mantissa);
+        public static DataType Real() => new Real();
+        public static DataType VarChar() => new VarChar();
+        public static DataType VarChar(int n) => new VarChar(n);
+        public static DataType Char() => new Char();
+        public static DataType Char(int n) => new Char(n);
+        public static DataType VarBinary() => new VarBinary();
+        public static DataType VarBinary(int n) => new VarBinary(n);
+        public static DataType Binary() => new Binary();
+        public static DataType Binary(int n) => new Binary(n);
+        public static DataType NVarChar() => new NVarChar();
+        public static DataType NVarChar(int n) => new NVarChar(n);
+        public static DataType NChar() => new NChar();
+        public static DataType NChar(int n) => new NChar(n);
+        public static DataType Date() => new Date();
+        public static DataType DateTime() => new DateTime();
+        public static DataType DateTime2() => new DateTime2();
+        public static DataType DateTime2(int precision) => new DateTime2(precision);
+        public static DataType Time() => new Time();
+        public static DataType Time(int scale) => new Time(scale);
+        public static DataType UniqueIdentifier() => new UniqueIdentifier();
 
         public abstract string Definition { get; }
         public abstract int Size { get; }
