@@ -10,14 +10,32 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
     public class TableShould
     {
         [Fact]
-        public void ThrowExceptionWhenCreatingWithNoColumns()
+        public void ThrowExceptionWhenCreatingWithNoName()
         {
-            string tableName = nameof(ThrowExceptionWhenCreatingWithNoColumns);
-            Table table = new Table(tableName);
-            using (SqlConnection sqlConnection = new SqlConnection(""))
-            {
-                table.Create(sqlConnection);
-            }
+            Assert.Throws<InvalidDatabaseIdentifierException>(() => new Table(""));
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenCreatingWithNoColumns()
+        {            
+            Table table = new Table("test");
+            Assert.Throws<InvalidTableDefinitionException>(() => table.Create(null));
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenCreateWithNullSqlConnection()
+        {
+            Table table = new Table("test");
+            table.Columns.Add(new Column("test", DataType.BigInt()));
+            Assert.Throws<ArgumentNullException>(() => table.Create(null));
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenDroppingWithNullSqlConnection()
+        {
+            Table table = new Table("test");
+            table.Columns.Add(new Column("test", DataType.BigInt()));
+            Assert.Throws<ArgumentNullException>(() => table.Drop(null));
         }
     }
 }
