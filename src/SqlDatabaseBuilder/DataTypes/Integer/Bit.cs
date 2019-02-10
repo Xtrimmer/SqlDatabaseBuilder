@@ -8,7 +8,5 @@ namespace Xtrimmer.SqlDatabaseBuilder
     {
         public override string Definition => "bit";
         public override int Size => 1;
-        public static long Max = 1;
-        public static long Min = 0;
     }
 }

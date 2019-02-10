@@ -8,7 +8,5 @@ namespace Xtrimmer.SqlDatabaseBuilder
     {
         public override string Definition => "tinyint";
         public override int Size => 1;
-        public static long Max = 255;
-        public static long Min = 0;
     }
 }
