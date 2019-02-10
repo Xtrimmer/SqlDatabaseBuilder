@@ -13,7 +13,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
             get { return n; }
             set
             {
-                if (value < MinN || value > MaxN) throw new InvalidCharacterSetLength($"N value must be between {MinN} and {MaxN}");
+                if (value < MinN || value > MaxN) throw new InvalidCharacterSetLengthException($"N value must be between {MinN} and {MaxN}");
                 n = value;
             }
         }

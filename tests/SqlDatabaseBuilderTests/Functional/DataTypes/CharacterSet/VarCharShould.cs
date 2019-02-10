@@ -78,7 +78,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
         [InlineData(int.MinValue)]
         public void ThrowInvalidCharacterSetLength(int n)
         {
-            Assert.Throws<InvalidCharacterSetLength>(() => DataType.VarChar(n));            
+            Assert.Throws<InvalidCharacterSetLengthException>(() => DataType.VarChar(n));            
         }
     }
 }

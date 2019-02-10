@@ -23,7 +23,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
             get { return n; }
             set
             {
-                if (value != MAX && (value < MinN || value > MaxN)) throw new InvalidCharacterSetLength($"N value must be between {MinN} and {MaxN} or DataType.MAX");
+                if (value != MAX && (value < MinN || value > MaxN)) throw new InvalidCharacterSetLengthException($"N value must be between {MinN} and {MaxN} or DataType.MAX");
                 n = value;
             }
         }
