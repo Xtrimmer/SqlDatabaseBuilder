@@ -160,5 +160,12 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
             DataType dataType = DataType.Time();
             Assert.Equal("time", dataType.Definition);
         }
+
+        [Fact]
+        public void returnUniqueIdentifierType()
+        {
+            DataType dataType = DataType.UniqueIdentifier();
+            Assert.Equal("uniqueidentifier", dataType.Definition);
+        }
     }
 }
