@@ -28,11 +28,10 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
         }
 
         [Fact]
-        public void ThrowArgumentNullExceptionIfNameIsNull()
+        public void ThrowInvalidDatabaseIdentifierExceptionIfNameIsNull()
         {
             Database database;
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => database = new Database(null));
-            Assert.Equal(NULL_PARAMETER_NAME, ex.ParamName);
+            Assert.Throws<InvalidDatabaseIdentifierException>(() => database = new Database(null));
         }
 
         [Theory]

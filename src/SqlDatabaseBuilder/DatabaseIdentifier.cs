@@ -13,9 +13,9 @@ namespace Xtrimmer.SqlDatabaseBuilder
         internal string Name { get; }
 
         public DatabaseIdentifier(string name) {
-            name.ThrowIfNull("name");
-            Name = IsValidLength(name) ? name :
-                throw new InvalidDatabaseIdentifierException($"Identifiers must contain from {MIN_ID_LENGTH} through {MAX_ID_LENGTH} characters.");
+            if (name == null) throw new InvalidDatabaseIdentifierException($"Identifiers must not be null");
+            if (!IsValidLength(name)) throw new InvalidDatabaseIdentifierException($"Identifiers must contain from {MIN_ID_LENGTH} through {MAX_ID_LENGTH} characters.");
+            Name = name;
         }
 
         private bool IsValidLength(string s) => s.Length >= MIN_ID_LENGTH && s.Length <= MAX_ID_LENGTH;

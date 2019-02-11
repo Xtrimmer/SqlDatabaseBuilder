@@ -10,9 +10,15 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
     public class TableShould
     {
         [Fact]
-        public void ThrowExceptionWhenCreatingWithNoName()
+        public void ThrowExceptionWhenCreatingWithEmptyName()
         {
             Assert.Throws<InvalidDatabaseIdentifierException>(() => new Table(""));
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenCreatingWithNullName()
+        {
+            Assert.Throws<InvalidDatabaseIdentifierException>(() => new Table(null));
         }
 
         [Fact]
