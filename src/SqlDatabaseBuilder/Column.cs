@@ -20,8 +20,8 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
             get
             {
-                string nullDefinition = Nullable ? "" : "NOT NULL";
-                return $"[{Name}] {DataType.Definition} {nullDefinition}";
+                string nullDefinition = Nullable ? "" : " NOT NULL";
+                return $"[{Name}] {DataType.Definition}{nullDefinition}";
             }
         }
     }
