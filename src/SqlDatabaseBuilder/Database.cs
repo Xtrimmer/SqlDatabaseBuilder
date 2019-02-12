@@ -5,7 +5,10 @@ namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class Database : DatabaseResource
     {
-        public Database(string databaseName) : base(databaseName) { }
+        public Database(string databaseName) : base(databaseName)
+        {
+            if (databaseName == null) throw new InvalidDatabaseIdentifierException("Database name cannot be null");
+        }
 
         public override void Create(SqlConnection sqlConnection)
         {
