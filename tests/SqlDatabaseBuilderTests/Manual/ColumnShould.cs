@@ -105,40 +105,42 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         private static Table CreateTableWithEveryDataType(string tableName)
         {
             Table table = new Table(tableName);
-            table.Columns.Add(new Column("ID", DataType.BigInt()));
-            table.Columns.Add(new Column("Amount", DataType.Int()));
-            table.Columns.Add(new Column("Maximum", DataType.TinyInt()));
-            table.Columns.Add(new Column("Minimum", DataType.SmallInt()));
-            table.Columns.Add(new Column("Payment", DataType.Money()));
-            table.Columns.Add(new Column("Change", DataType.SmallMoney()));
-            table.Columns.Add(new Column("Decimal", DataType.Decimal()));
-            table.Columns.Add(new Column("Decimal-1", DataType.Decimal(10)));
-            table.Columns.Add(new Column("Decimal-2", DataType.Decimal(20, 5)));
-            table.Columns.Add(new Column("Numeric", DataType.Numeric()));
-            table.Columns.Add(new Column("Numeric-1", DataType.Numeric(15)));
-            table.Columns.Add(new Column("Numeric-2", DataType.Numeric(22, 11)));
-            table.Columns.Add(new Column("VarChar", DataType.VarChar()));
-            table.Columns.Add(new Column("VarChar-128", DataType.VarChar(128)));
-            table.Columns.Add(new Column("VarChar-MAX", DataType.VarChar(DataType.MAX)));
-            table.Columns.Add(new Column("Char", DataType.Char()));
-            table.Columns.Add(new Column("Char-256", DataType.Char(256)));
-            table.Columns.Add(new Column("VarBinary", DataType.VarBinary()));
-            table.Columns.Add(new Column("VarBinary-512", DataType.VarBinary(512)));
-            table.Columns.Add(new Column("VarBinary-MAX", DataType.VarBinary(DataType.MAX)));
-            table.Columns.Add(new Column("Binary", DataType.Binary()));
-            table.Columns.Add(new Column("Binary-1024", DataType.Binary(1024)));
-            table.Columns.Add(new Column("NVarChar", DataType.NVarChar()));
-            table.Columns.Add(new Column("NVarChar-248", DataType.NVarChar(248)));
-            table.Columns.Add(new Column("NVarChar-MAX", DataType.NVarChar(DataType.MAX)));
-            table.Columns.Add(new Column("NChar", DataType.NChar()));
-            table.Columns.Add(new Column("NChar-400", DataType.NChar(400)));
-            table.Columns.Add(new Column("Date", DataType.Date()));
-            table.Columns.Add(new Column("DateTime", DataType.DateTime()));
-            table.Columns.Add(new Column("DateTime2", DataType.DateTime2()));
-            table.Columns.Add(new Column("DateTime2-2", DataType.DateTime2(2)));
-            table.Columns.Add(new Column("Time", DataType.Time()));
-            table.Columns.Add(new Column("Time-1", DataType.Time(1)));
-            table.Columns.Add(new Column("UniqueIdentifier", DataType.UniqueIdentifier()));
+            table.Columns.AddAll(
+                new Column("ID", DataType.BigInt()),            
+			    new Column("Amount", DataType.Int()),
+				new Column("Maximum", DataType.TinyInt()),
+				new Column("Minimum", DataType.SmallInt()),
+				new Column("Payment", DataType.Money()),
+				new Column("Change", DataType.SmallMoney()),
+				new Column("Decimal", DataType.Decimal()),
+				new Column("Decimal-1", DataType.Decimal(10)),
+				new Column("Decimal-2", DataType.Decimal(20, 5)),
+				new Column("Numeric", DataType.Numeric()),
+				new Column("Numeric-1", DataType.Numeric(15)),
+				new Column("Numeric-2", DataType.Numeric(22, 11)),
+				new Column("VarChar", DataType.VarChar()),
+				new Column("VarChar-128", DataType.VarChar(128)),
+				new Column("VarChar-MAX", DataType.VarChar(DataType.MAX)),
+				new Column("Char", DataType.Char()),
+				new Column("Char-256", DataType.Char(256)),
+				new Column("VarBinary", DataType.VarBinary()),
+				new Column("VarBinary-512", DataType.VarBinary(512)),
+				new Column("VarBinary-MAX", DataType.VarBinary(DataType.MAX)),
+				new Column("Binary", DataType.Binary()),
+				new Column("Binary-1024", DataType.Binary(1024)),
+				new Column("NVarChar", DataType.NVarChar()),
+				new Column("NVarChar-248", DataType.NVarChar(248)),
+				new Column("NVarChar-MAX", DataType.NVarChar(DataType.MAX)),
+				new Column("NChar", DataType.NChar()),
+				new Column("NChar-400", DataType.NChar(400)),
+				new Column("Date", DataType.Date()),
+				new Column("DateTime", DataType.DateTime()),
+				new Column("DateTime2", DataType.DateTime2()),
+				new Column("DateTime2-2", DataType.DateTime2(2)),
+				new Column("Time", DataType.Time()),
+				new Column("Time-1", DataType.Time(1)),
+				new Column("UniqueIdentifier", DataType.UniqueIdentifier())
+            );
             return table;
         }
     }
