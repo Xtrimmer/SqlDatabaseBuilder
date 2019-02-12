@@ -27,13 +27,6 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
             Assert.Equal(INVALID_ID_MESSAGE, ex.Message);
         }
 
-        [Fact]
-        public void ThrowInvalidDatabaseIdentifierExceptionIfNameIsNull()
-        {
-            Database database;
-            Assert.Throws<InvalidDatabaseIdentifierException>(() => database = new Database(null));
-        }
-
         [Theory]
         [InlineData("A")]
         [InlineData("AB")]
