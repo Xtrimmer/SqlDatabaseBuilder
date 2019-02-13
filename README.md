@@ -15,7 +15,7 @@ The DATABASE object is used to create a new SQL database.
 ```csharp
     Database database = new Database("MyDatabase");
 
-    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;")
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
     {
         sqlConnection.Open();
         database.Create(sqlConnection);
@@ -34,7 +34,7 @@ The Table object is used to create database tables.
         new Column("City", DataType.VarChar(255))
     );
 
-    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;")
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
     {
         sqlConnection.Open();
         table.Create(sqlConnection);
@@ -60,7 +60,7 @@ The NOT NULL constraint enforces a column to NOT accept NULL values.
 
     table.Columns.AddAll(personId, lastName, firstName, age);
 
-    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;")
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
     {
         sqlConnection.Open();
         table.Create(sqlConnection);
@@ -83,7 +83,7 @@ A table can have only one primary key, which may consist of single or multiple f
 
     table.Constraints.Add(new PrimaryKeyConstraint(id));
 
-    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;")
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
     {
         sqlConnection.Open();
         table.Create(sqlConnection);
@@ -123,7 +123,7 @@ The following creates a UNIQUE constraint on the "ID" column when the "Persons" 
 
     table.Constraints.Add(new UniqueConstraint(id));
 
-    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;")
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
     {
         sqlConnection.Open();
         table.Create(sqlConnection);
