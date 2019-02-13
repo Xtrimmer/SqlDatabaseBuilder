@@ -10,6 +10,14 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
     public class TableShould
     {
         [Fact]
+        public void ThrowExceptionWhenAddingMoreThanOnePrimaryKeyConstraint()
+        {
+            Table table = new Table("test");
+            table.Constraints.Add(new PrimaryKeyConstraint());
+            Assert.Throws<MultiplePrimaryKeyException>(() => table.Constraints.Add(new PrimaryKeyConstraint()));
+        }
+
+        [Fact]
         public void ThrowExceptionWhenCreatingWithEmptyName()
         {
             Assert.Throws<InvalidDatabaseIdentifierException>(() => new Table(""));

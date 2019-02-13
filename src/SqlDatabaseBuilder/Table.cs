@@ -9,15 +9,17 @@ namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class Table : DatabaseResource
     {
-        public List<Column> Columns { get; set; } = new List<Column>();
-
+        public ConstraintCollection Constraints { get; set; } = new ConstraintCollection();
+        public DatabaseObjectCollection<Column> Columns { get; set; } = new DatabaseObjectCollection<Column>();
+        
         public Table(string name) : base(name)
         {
+            if (name == null) throw new InvalidDatabaseIdentifierException("Table name cannot be null");
         }
 
         public override void Create(SqlConnection sqlConnection)
         {
-            if (!Columns.Any()) throw new InvalidTableDefinitionException("Table must specify at least one column.");
+            if (Columns.isEmpty()) throw new InvalidTableDefinitionException("Table must specify at least one column.");
             sqlConnection.ThrowIfNull(nameof(sqlConnection));
             using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
             {
@@ -38,12 +40,18 @@ namespace Xtrimmer.SqlDatabaseBuilder
             }
         }
 
+        public void AddColumns(params Column[] columns)
+        {
+            Array.ForEach(columns, c => Columns.Add(c));
+        }
+
         internal override string SqlDefinition
         {
             get
             {
-                string columnDefinitions = string.Join(", ", Columns.Select(c => c.SqlDefinition).ToList());
-                return $"CREATE TABLE [{Name}] ({columnDefinitions})";
+                string columnDefinitions = Columns.SqlDefinition;
+                string constraintDefinitions = Constraints.isEmpty() ? "" :  $", {Constraints.SqlDefinition}";
+                return $"CREATE TABLE [{Name}] ({columnDefinitions}{constraintDefinitions})";
             }
         }
     }
