@@ -13,11 +13,27 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         public PrimaryKeyConstraint(string name) : base(name) { }
 
+        public PrimaryKeyConstraint(Column column, ColumnSort sortOrder = ColumnSort.ASC) : base(null)
+        {
+            AddColumn(column, sortOrder);
+        }
+
+        public PrimaryKeyConstraint(string name, Column column, ColumnSort sortOrder = ColumnSort.ASC) : base(name)
+        {
+            AddColumn(column, sortOrder);
+        }
+
         public IndexType IndexType { get; set; } = IndexType.CLUSTERED;
 
         public PrimaryKeyConstraint AddColumn(Column column, ColumnSort sortOrder = ColumnSort.ASC)
         {
             columns.Add(new Tuple<Column, ColumnSort>(column, sortOrder));
+            return this;
+        }
+
+        public PrimaryKeyConstraint AddColumns(params Column[] columns)
+        {
+            Array.ForEach(columns, c => this.columns.Add(Tuple.Create(c, ColumnSort.ASC)));
             return this;
         }
 
