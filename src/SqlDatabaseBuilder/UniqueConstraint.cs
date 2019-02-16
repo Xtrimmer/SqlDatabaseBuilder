@@ -13,11 +13,27 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         public UniqueConstraint(string name) : base(name) { }
 
+        public UniqueConstraint(Column column, ColumnSort sortOrder = ColumnSort.ASC) : base(null)
+        {
+            AddColumn(column, sortOrder);
+        }
+
+        public UniqueConstraint(string name, Column column, ColumnSort sortOrder = ColumnSort.ASC) : base(name)
+        {
+            AddColumn(column, sortOrder);
+        }
+
         public IndexType IndexType { get; set; } = IndexType.NONCLUSTERED;
 
         public UniqueConstraint AddColumn(Column column, ColumnSort sortOrder = ColumnSort.ASC)
         {
             columns.Add(new Tuple<Column, ColumnSort>(column, sortOrder));
+            return this;
+        }
+
+        public UniqueConstraint AddColumns(params Column[] columns)
+        {
+            Array.ForEach(columns, c => this.columns.Add(Tuple.Create(c, ColumnSort.ASC)));
             return this;
         }
 
