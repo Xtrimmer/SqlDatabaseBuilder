@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+﻿using System.Data.SqlClient;
 
 namespace Xtrimmer.SqlDatabaseBuilder
 {
@@ -11,7 +6,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
     {
         public ConstraintCollection Constraints { get; set; } = new ConstraintCollection();
         public DatabaseObjectCollection<Column> Columns { get; set; } = new DatabaseObjectCollection<Column>();
-        
+
         public Table(string name) : base(name)
         {
             if (name == null) throw new InvalidDatabaseIdentifierException("Table name cannot be null");
@@ -40,17 +35,12 @@ namespace Xtrimmer.SqlDatabaseBuilder
             }
         }
 
-        public void AddColumns(params Column[] columns)
-        {
-            Array.ForEach(columns, c => Columns.Add(c));
-        }
-
         internal override string SqlDefinition
         {
             get
             {
                 string columnDefinitions = Columns.SqlDefinition;
-                string constraintDefinitions = Constraints.isEmpty() ? "" :  $", {Constraints.SqlDefinition}";
+                string constraintDefinitions = Constraints.isEmpty() ? "" : $", {Constraints.SqlDefinition}";
                 return $"CREATE TABLE [{Name}] ({columnDefinitions}{constraintDefinitions})";
             }
         }
