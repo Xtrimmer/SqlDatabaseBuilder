@@ -1,16 +1,8 @@
-﻿using Xtrimmer.SqlDatabaseBuilder;
-
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+using Xtrimmer.SqlDatabaseBuilder;
 using Xunit;
 using UniqueConstraint = Xtrimmer.SqlDatabaseBuilder.UniqueConstraint;
-using Xunit.Sdk;
-using System.Reflection;
-using Constraint = Xtrimmer.SqlDatabaseBuilder.Constraint;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
@@ -23,7 +15,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         {
             string tableName = nameof(CreateAndDropTable);
             Table table = new Table(tableName);
-            table.AddColumns(new Column("Id", DataType.Int()));            
+            table.AddColumns(new Column("Id", DataType.Int()));
 
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -60,7 +52,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                 {
                     string sql = $"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsPrimaryKey') = 1 AND TABLE_NAME = '{tableName}'";
                     sqlCommand.CommandText = sql;
-                    string columnNameResult = (string) sqlCommand.ExecuteScalar();
+                    string columnNameResult = (string)sqlCommand.ExecuteScalar();
                     Assert.Equal(COLUMN_NAME, columnNameResult);
                 }
 
