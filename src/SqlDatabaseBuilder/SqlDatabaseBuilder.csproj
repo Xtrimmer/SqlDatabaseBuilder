@@ -5,7 +5,7 @@
     <Authors>Jeff Trimmer</Authors>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Company />
-    <Version>1.0.0.1</Version>
+    <Version>0.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
