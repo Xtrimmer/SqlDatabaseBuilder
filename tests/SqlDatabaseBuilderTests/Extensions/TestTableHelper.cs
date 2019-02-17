@@ -8,10 +8,11 @@ namespace Xtrimmer.SqlDatabaseBuilderTests
 {
     internal static class TestTableHelper
     {
-        public static bool IsTablePresentInDatabase(this Table table, string tableName, SqlConnection sqlConnection)
+        public static bool IsTablePresentInDatabase(this Table table, SqlConnection sqlConnection)
         {
             using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
             {
+                string tableName = table.Name;
                 string sql = "SELECT object_id FROM sys.tables WHERE name = @tableName";
                 sqlCommand.CommandText = sql;
                 sqlCommand.Parameters.Add(new SqlParameter("tableName", tableName));

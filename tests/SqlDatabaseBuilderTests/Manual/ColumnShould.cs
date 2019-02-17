@@ -19,9 +19,9 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                Assert.False(table.IsTablePresentInDatabase(tableName, sqlConnection));
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
                 table.Create(sqlConnection);
-                Assert.True(table.IsTablePresentInDatabase(tableName, sqlConnection));
+                Assert.True(table.IsTablePresentInDatabase(sqlConnection));
                 Assert.True(AllDataTypesMatch(table, sqlConnection));
                 table.Drop(sqlConnection);
             }
@@ -36,9 +36,9 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                Assert.False(table.IsTablePresentInDatabase(tableName, sqlConnection));
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
                 table.Create(sqlConnection);
-                Assert.True(table.IsTablePresentInDatabase(tableName, sqlConnection));
+                Assert.True(table.IsTablePresentInDatabase(sqlConnection));
                 Assert.True(AllColumnsNotNull(table, sqlConnection));
                 table.Drop(sqlConnection);
             }
