@@ -113,17 +113,25 @@ The sorting order can also be defined like this:
 A FOREIGN KEY is a key used to link two tables together.
 A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table.
 ```csharp
-    Table table = new Table("Orders");
+    Table personsTable = new Table("Persons");
+    Column id = new Column("Id", DataType.Int()) { Nullable = false };
+    Column lastName = new Column("LastName", DataType.VarChar(255));
+    Column firstName = new Column("FirstName", DataType.VarChar(255));
+    Column age = new Column("Age", DataType.Int());
+    personsTable.Columns.AddAll(id, lastName, firstName, age);
+    personsTable.Constraints.Add(new PrimaryKeyConstraint(id));
+
+    Table OrdersTable = new Table("Orders");
     Column orderId = new Column("OrderId", DataType.Int());
     Column orderNumber = new Column("OrderNumber", DataType.Int());
     Column personId = new Column("PersonId", DataType.Int());
-    table.Columns.AddAll(orderId, orderNumber, personId);
+    OrdersTable.Columns.AddAll(orderId, orderNumber, personId);
 
     ForeignKeyConstraint foreignKeyConstraint = new ForeignKeyConstraint();
     foreignKeyConstraint.AddColumn(personId)
-        .References(personTable)
+        .References(personsTable)
         .AddReferenceColumn(id);
-    table.Constraints.Add(foreignKeyConstraint);
+    OrdersTable.Constraints.Add(foreignKeyConstraint);
 ```
 # SQL UNIQUE Constraint
 The following creates a UNIQUE constraint on the "ID" column when the "Persons" table is created:
