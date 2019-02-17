@@ -41,7 +41,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
             {
                 string columnDefinitions = Columns.SqlDefinition;
                 string constraintDefinitions = Constraints.isEmpty() ? "" : $", {Constraints.SqlDefinition}";
-                return $"CREATE TABLE [{Name}] ({columnDefinitions}{constraintDefinitions})";
+                return $"CREATE TABLE [{Name}] ({columnDefinitions}{constraintDefinitions});";
             }
         }
     }
