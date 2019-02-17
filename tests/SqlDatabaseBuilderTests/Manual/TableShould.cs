@@ -15,7 +15,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         {
             string tableName = nameof(CreateAndDropTable);
             Table table = new Table(tableName);
-            table.AddColumns(new Column("Id", DataType.Int()));
+            table.Columns.Add(new Column("Id", DataType.Int()));
 
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -36,7 +36,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 
             Table table = new Table(tableName);
             Column column = new Column(COLUMN_NAME, DataType.Int());
-            table.AddColumns(column);
+            table.Columns.Add(column);
             PrimaryKeyConstraint primaryKeyConstraint = new PrimaryKeyConstraint("PrimaryKeyConstraint");
             primaryKeyConstraint.AddColumn(column);
             table.Constraints.Add(primaryKeyConstraint);
@@ -69,7 +69,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 
             Table table = new Table(tableName);
             Column column = new Column(COLUMN_NAME, DataType.Int());
-            table.AddColumns(column);
+            table.Columns.Add(column);
             UniqueConstraint uniqueConstraint = new UniqueConstraint("UniqueConstraint");
             uniqueConstraint.AddColumn(column);
             table.Constraints.Add(uniqueConstraint);
@@ -106,7 +106,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             Column column1 = new Column(PK_COLUMN_NAME, DataType.Int());
             Column column2 = new Column(UQ1_COLUMN_NAME, DataType.Char(10));
             Column column3 = new Column(UQ2_COLUMN_NAME, DataType.Money());
-            table.AddColumns(column1, column2, column3);
+            table.Columns.AddAll(column1, column2, column3);
 
             PrimaryKeyConstraint primaryKeyConstraint = new PrimaryKeyConstraint();
             primaryKeyConstraint.IndexType = IndexType.NONCLUSTERED;
