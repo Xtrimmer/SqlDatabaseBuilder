@@ -8,7 +8,7 @@ Xtrimmer SqlDatabaseBuilder is a simple library designed to help you build a Sql
 
 # New Features!
 
-  - Added Primary Key and Unique Key table constraint support
+  - Added Primary Key, Foreign key and Unique Key table constraint support
 
 # SQL CREATE DATABASE
 The DATABASE object is used to create a new SQL database.
@@ -108,6 +108,22 @@ The sorting order can also be defined like this:
     primaryKeyConstraint.AddColumn(id, ColumnSort.ASC);
     primaryKeyConstraint.AddColumn(lastName, ColumnSort.DESC);
     table.Constraints.Add(primaryKeyConstraint);
+```
+# SQL FOREIGN KEY Constraint
+A FOREIGN KEY is a key used to link two tables together.
+A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table.
+```csharp
+    Table table = new Table("Orders");
+    Column orderId = new Column("OrderId", DataType.Int());
+    Column orderNumber = new Column("OrderNumber", DataType.Int());
+    Column personId = new Column("PersonId", DataType.Int());
+    table.Columns.AddAll(orderId, orderNumber, personId);
+
+    ForeignKeyConstraint foreignKeyConstraint = new ForeignKeyConstraint();
+    foreignKeyConstraint.AddColumn(personId)
+        .References(personTable)
+        .AddReferenceColumn(id);
+    table.Constraints.Add(foreignKeyConstraint);
 ```
 # SQL UNIQUE Constraint
 The following creates a UNIQUE constraint on the "ID" column when the "Persons" table is created:

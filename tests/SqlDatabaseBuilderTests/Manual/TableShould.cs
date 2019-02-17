@@ -142,5 +142,71 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                 Assert.False(table.IsTablePresentInDatabase(sqlConnection));
             }
         }
+
+        [Fact]
+        public void CreateTableWithForeignKeyConstraints()
+        {
+            const string FK_NAME = "PersonId";
+
+            Table primaryTable = new Table(nameof(CreateTableWithForeignKeyConstraints) + "Persons");
+            Column id = new Column("Id", DataType.Int())
+            {
+                Nullable = false
+            };
+            Column lastName = new Column("LastName", DataType.VarChar(255))
+            {
+                Nullable = false
+            };
+            Column firstName = new Column("FirstName", DataType.VarChar(255));
+            Column age = new Column("Age", DataType.Int());
+            primaryTable.Columns.AddAll(id, lastName, firstName, age);
+            PrimaryKeyConstraint pk = new PrimaryKeyConstraint()
+                .AddColumns(id, lastName);
+            primaryTable.Constraints.Add(pk);
+
+            Table foreignTable = new Table(nameof(CreateTableWithForeignKeyConstraints) + "Orders");
+            Column orderId = new Column("OrderId", DataType.Int())
+            {
+                Nullable = false
+            };
+            Column orderNumber = new Column("OrderNumber", DataType.Int())
+            {
+                Nullable = false
+            };
+            Column personId = new Column(FK_NAME, DataType.Int());
+            Column personName = new Column(FK_NAME, DataType.VarChar(255));
+            foreignTable.Columns.AddAll(orderId, orderNumber, personId, personName);
+            PrimaryKeyConstraint primaryKeyConstraint = new PrimaryKeyConstraint(orderId);
+            ForeignKeyConstraint foreignKeyConstraint = new ForeignKeyConstraint("FK_NAME");
+            foreignKeyConstraint.AddColumns(personId, personName)
+                .References(primaryTable)
+                .AddReferenceColumns(id, lastName);
+            foreignTable.Constraints.AddAll(primaryKeyConstraint, foreignKeyConstraint);
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                Assert.False(primaryTable.IsTablePresentInDatabase(sqlConnection));
+                primaryTable.Create(sqlConnection);
+                Assert.True(primaryTable.IsTablePresentInDatabase(sqlConnection));
+
+                Assert.False(foreignTable.IsTablePresentInDatabase(sqlConnection));
+                foreignTable.Create(sqlConnection);
+                Assert.True(foreignTable.IsTablePresentInDatabase(sqlConnection));
+
+                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+                {
+                    string sql = $"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsForeignKey') = 1 AND TABLE_NAME = '{foreignTable.Name}'";
+                    sqlCommand.CommandText = sql;
+                    string primaryKeycolumnNameResult = (string)sqlCommand.ExecuteScalar();
+                    Assert.Equal(FK_NAME, primaryKeycolumnNameResult);
+                }
+                
+                foreignTable.Drop(sqlConnection);
+                Assert.False(foreignTable.IsTablePresentInDatabase(sqlConnection));
+                primaryTable.Drop(sqlConnection);
+                Assert.False(primaryTable.IsTablePresentInDatabase(sqlConnection));
+            }
+        }
     }
 }
