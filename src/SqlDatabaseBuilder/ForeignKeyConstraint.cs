@@ -7,8 +7,8 @@ namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class ForeignKeyConstraint : Constraint
     {
-        private List<Column> localColumns = new List<Column>();
-        private List<Column> referenceColumns = new List<Column>();
+        private readonly List<Column> localColumns = new List<Column>();
+        private readonly List<Column> referenceColumns = new List<Column>();
         private Table referenceTable;
 
         public ForeignKeyConstraint() : base(null) { }
@@ -25,6 +25,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
             Array.ForEach(columns, c => this.localColumns.Add(c));
             return this;
+              
         }
 
         public ForeignKeyConstraint References(Table table)
