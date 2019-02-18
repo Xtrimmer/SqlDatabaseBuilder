@@ -62,6 +62,40 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         }
 
         [Fact]
+        public void CreateTableWithPrimaryKey2()
+        {
+            const string COLUMN_NAME = "Id";
+            string tableName = nameof(CreateTableWithPrimaryKey);
+
+            Table table = new Table(tableName);
+            Column column = new Column(COLUMN_NAME, DataType.Int());
+            Column column2 = new Column("Id2", DataType.Int());
+            table.Columns.AddAll(column, column2);
+            PrimaryKeyConstraint primaryKeyConstraint = new PrimaryKeyConstraint("PrimaryKeyConstraint", column, ColumnSort.DESC);
+            primaryKeyConstraint.AddColumns(column2);
+            table.Constraints.Add(primaryKeyConstraint);
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
+                table.Create(sqlConnection);
+                Assert.True(table.IsTablePresentInDatabase(sqlConnection));
+
+                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+                {
+                    string sql = $"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsPrimaryKey') = 1 AND TABLE_NAME = '{tableName}'";
+                    sqlCommand.CommandText = sql;
+                    string columnNameResult = (string)sqlCommand.ExecuteScalar();
+                    Assert.Equal(COLUMN_NAME, columnNameResult);
+                }
+
+                table.Drop(sqlConnection);
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
+            }
+        }
+
+        [Fact]
         public void CreateTableWithUniqueConstraint()
         {
             const string COLUMN_NAME = "Unique";
@@ -160,9 +194,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             Column firstName = new Column("FirstName", DataType.VarChar(255));
             Column age = new Column("Age", DataType.Int());
             primaryTable.Columns.AddAll(id, lastName, firstName, age);
-            PrimaryKeyConstraint pk = new PrimaryKeyConstraint()
-                .AddColumns(id, lastName);
-            primaryTable.Constraints.Add(pk);
+            primaryTable.Constraints.Add(new PrimaryKeyConstraint(id));
 
             Table foreignTable = new Table(nameof(CreateTableWithForeignKeyConstraints) + "Orders");
             Column orderId = new Column("OrderId", DataType.Int())
@@ -174,13 +206,12 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                 Nullable = false
             };
             Column personId = new Column(FK_NAME, DataType.Int());
-            Column personName = new Column(FK_NAME, DataType.VarChar(255));
-            foreignTable.Columns.AddAll(orderId, orderNumber, personId, personName);
+            foreignTable.Columns.AddAll(orderId, orderNumber, personId);
             PrimaryKeyConstraint primaryKeyConstraint = new PrimaryKeyConstraint(orderId);
-            ForeignKeyConstraint foreignKeyConstraint = new ForeignKeyConstraint("FK_NAME");
-            foreignKeyConstraint.AddColumns(personId, personName)
+            ForeignKeyConstraint foreignKeyConstraint = new ForeignKeyConstraint();
+            foreignKeyConstraint.AddColumn(personId)
                 .References(primaryTable)
-                .AddReferenceColumns(id, lastName);
+                .AddReferenceColumn(id);
             foreignTable.Constraints.AddAll(primaryKeyConstraint, foreignKeyConstraint);
 
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
