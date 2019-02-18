@@ -8,16 +8,16 @@ namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class ConstraintCollection : DatabaseObjectCollection<Constraint>
     { 
-        public override DatabaseObjectCollection<Constraint> Add(Constraint constraint)
+        public override DatabaseObjectCollection<Constraint> Add(Constraint item)
         {
-            constraint.ThrowIfNull(nameof(constraint));
-            if (constraint is PrimaryKeyConstraint && ContainsPrimaryKey())
+            item.ThrowIfNull(nameof(item));
+            if (item is PrimaryKeyConstraint && ContainsPrimaryKey())
             {
                 throw new MultiplePrimaryKeyException("A constraint collection can have only one PrimaryKeyConstraint");
             }
             else
             {
-                list.Add(constraint);
+                list.Add(item);
             }
             return this;
         }
