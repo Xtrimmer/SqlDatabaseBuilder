@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Xtrimmer.SqlDatabaseBuilder
 {
@@ -9,14 +8,11 @@ namespace Xtrimmer.SqlDatabaseBuilder
     {
         private List<Tuple<Column, ColumnSort>> columns { get; set; } = new List<Tuple<Column, ColumnSort>>();
 
-        public UniqueConstraint() : base(null) { }
+        public UniqueConstraint() : this(null) { }
 
         public UniqueConstraint(string name) : base(name) { }
 
-        public UniqueConstraint(Column column, ColumnSort sortOrder = ColumnSort.ASC) : base(null)
-        {
-            AddColumn(column, sortOrder);
-        }
+        public UniqueConstraint(Column column, ColumnSort sortOrder = ColumnSort.ASC) : this(null, column, sortOrder) { }
 
         public UniqueConstraint(string name, Column column, ColumnSort sortOrder = ColumnSort.ASC) : base(name)
         {
