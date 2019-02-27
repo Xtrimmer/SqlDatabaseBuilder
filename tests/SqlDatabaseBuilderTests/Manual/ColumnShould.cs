@@ -1,14 +1,14 @@
-﻿using Xtrimmer.SqlDatabaseBuilder;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using Xtrimmer.SqlDatabaseBuilder;
 using Xunit;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class ColumnShould
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath", EnvironmentVariableTarget.User);
+        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
 
         [Fact]
         public void DefineDataTypesCorrectly()
@@ -106,40 +106,40 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         {
             Table table = new Table(tableName);
             table.Columns.AddAll(
-                new Column("ID", DataType.BigInt()),            
-			    new Column("Amount", DataType.Int()),
-				new Column("Maximum", DataType.TinyInt()),
-				new Column("Minimum", DataType.SmallInt()),
-				new Column("Payment", DataType.Money()),
-				new Column("Change", DataType.SmallMoney()),
-				new Column("Decimal", DataType.Decimal()),
-				new Column("Decimal-1", DataType.Decimal(10)),
-				new Column("Decimal-2", DataType.Decimal(20, 5)),
-				new Column("Numeric", DataType.Numeric()),
-				new Column("Numeric-1", DataType.Numeric(15)),
-				new Column("Numeric-2", DataType.Numeric(22, 11)),
-				new Column("VarChar", DataType.VarChar()),
-				new Column("VarChar-128", DataType.VarChar(128)),
-				new Column("VarChar-MAX", DataType.VarChar(DataType.MAX)),
-				new Column("Char", DataType.Char()),
-				new Column("Char-256", DataType.Char(256)),
-				new Column("VarBinary", DataType.VarBinary()),
-				new Column("VarBinary-512", DataType.VarBinary(512)),
-				new Column("VarBinary-MAX", DataType.VarBinary(DataType.MAX)),
-				new Column("Binary", DataType.Binary()),
-				new Column("Binary-1024", DataType.Binary(1024)),
-				new Column("NVarChar", DataType.NVarChar()),
-				new Column("NVarChar-248", DataType.NVarChar(248)),
-				new Column("NVarChar-MAX", DataType.NVarChar(DataType.MAX)),
-				new Column("NChar", DataType.NChar()),
-				new Column("NChar-400", DataType.NChar(400)),
-				new Column("Date", DataType.Date()),
-				new Column("DateTime", DataType.DateTime()),
-				new Column("DateTime2", DataType.DateTime2()),
-				new Column("DateTime2-2", DataType.DateTime2(2)),
-				new Column("Time", DataType.Time()),
-				new Column("Time-1", DataType.Time(1)),
-				new Column("UniqueIdentifier", DataType.UniqueIdentifier())
+                new Column("ID", DataType.BigInt()),
+                new Column("Amount", DataType.Int()),
+                new Column("Maximum", DataType.TinyInt()),
+                new Column("Minimum", DataType.SmallInt()),
+                new Column("Payment", DataType.Money()),
+                new Column("Change", DataType.SmallMoney()),
+                new Column("Decimal", DataType.Decimal()),
+                new Column("Decimal-1", DataType.Decimal(10)),
+                new Column("Decimal-2", DataType.Decimal(20, 5)),
+                new Column("Numeric", DataType.Numeric()),
+                new Column("Numeric-1", DataType.Numeric(15)),
+                new Column("Numeric-2", DataType.Numeric(22, 11)),
+                new Column("VarChar", DataType.VarChar()),
+                new Column("VarChar-128", DataType.VarChar(128)),
+                new Column("VarChar-MAX", DataType.VarChar(DataType.MAX)),
+                new Column("Char", DataType.Char()),
+                new Column("Char-256", DataType.Char(256)),
+                new Column("VarBinary", DataType.VarBinary()),
+                new Column("VarBinary-512", DataType.VarBinary(512)),
+                new Column("VarBinary-MAX", DataType.VarBinary(DataType.MAX)),
+                new Column("Binary", DataType.Binary()),
+                new Column("Binary-1024", DataType.Binary(1024)),
+                new Column("NVarChar", DataType.NVarChar()),
+                new Column("NVarChar-248", DataType.NVarChar(248)),
+                new Column("NVarChar-MAX", DataType.NVarChar(DataType.MAX)),
+                new Column("NChar", DataType.NChar()),
+                new Column("NChar-400", DataType.NChar(400)),
+                new Column("Date", DataType.Date()),
+                new Column("DateTime", DataType.DateTime()),
+                new Column("DateTime2", DataType.DateTime2()),
+                new Column("DateTime2-2", DataType.DateTime2(2)),
+                new Column("Time", DataType.Time()),
+                new Column("Time-1", DataType.Time(1)),
+                new Column("UniqueIdentifier", DataType.UniqueIdentifier())
             );
             return table;
         }
