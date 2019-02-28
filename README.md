@@ -134,6 +134,10 @@ A FOREIGN KEY is a field (or collection of fields) in one table that refers to t
     OrdersTable.Constraints.Add(foreignKeyConstraint);
 ```
 # SQL UNIQUE Constraint
+The UNIQUE constraint ensures that all values in a column are different.
+Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
 The following creates a UNIQUE constraint on the "ID" column when the "Persons" table is created:
 ```csharp
     Table table = new Table("Persons");
@@ -172,4 +176,25 @@ The sorting order can also be defined like this:
     uniqueConstraint.AddColumn(id, ColumnSort.ASC);
     uniqueConstraint.AddColumn(lastName, ColumnSort.DESC);
     table.Constraints.Add(uniqueConstraint);
+```
+# SQL CHECK Constraint
+The CHECK constraint is used to limit the value range that can be placed in a column.
+```csharp
+	Table table = new Table("Persons");
+	Column id = new Column("Id", DataType.Int()) { Nullable = false };
+	Column lastName = new Column("LastName", DataType.VarChar(255));
+	Column firstName = new Column("FirstName", DataType.VarChar(255));
+	Column age = new Column("Age", DataType.Int());
+	Column city = new Column("City", DataType.VarChar(255));
+	table.Columns.AddAll(id, lastName, firstName, age, city);
+
+	CheckExpression checkExpression = new CheckExpression(age, CheckOperator.GreaterThanOrEquals, "18");
+	CheckConstraint checkConstraint = new CheckConstraint(checkExpression);
+	table.Constraints.Add(checkConstraint);
+
+	using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
+	{
+		sqlConnection.Open();
+		table.Create(sqlConnection);
+	}
 ```
