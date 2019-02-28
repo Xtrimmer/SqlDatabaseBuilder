@@ -31,7 +31,7 @@
             SqlDefinition = expression;
         }
 
-        public CheckExpression(Column column, CheckOperator checkOperator, string value) : this($"[{column.Name}] {checkOperator.GetStringValue()} {value}") { }
+        public CheckExpression(Column column, CheckOperator checkOperator, object value) : this($"[{column.Name}] {checkOperator.GetStringValue()} {value.ToString()}") { }
 
         public CheckExpression(Column thisColumn, CheckOperator checkOperator, Column thatColumn) : this(thisColumn, checkOperator, $"[{thatColumn.Name}]") { }
 
@@ -47,9 +47,9 @@
             return this;
         }
 
-        public CheckExpression And(Column column, CheckOperator checkOperator, string value)
+        public CheckExpression And(Column column, CheckOperator checkOperator, object value)
         {
-            SqlDefinition = string.Concat(SqlDefinition.Trim(), " AND ", $"[{column.Name}] {checkOperator.GetStringValue()} {value}");
+            SqlDefinition = string.Concat(SqlDefinition.Trim(), " AND ", $"[{column.Name}] {checkOperator.GetStringValue()} {value.ToString()}");
             return this;
         }
 
@@ -71,9 +71,9 @@
             return this;
         }
 
-        public CheckExpression Or(Column column, CheckOperator checkOperator, string value)
+        public CheckExpression Or(Column column, CheckOperator checkOperator, object value)
         {
-            SqlDefinition = string.Concat(SqlDefinition.Trim(), " OR ", $"[{column.Name}] {checkOperator.GetStringValue()} {value}");
+            SqlDefinition = string.Concat(SqlDefinition.Trim(), " OR ", $"[{column.Name}] {checkOperator.GetStringValue()} {value.ToString()}");
             return this;
         }
 

@@ -22,12 +22,12 @@ namespace SqlDatabaseBuilderTests.Manual
 
             CheckConstraint checkConstraint = new CheckConstraint()
             {
-                CheckExpression = new CheckExpression(column, CheckOperator.GreaterThan, "0")
+                CheckExpression = new CheckExpression(column, CheckOperator.GreaterThan, 25)
             };
             
             table.Constraints.Add(checkConstraint);
 
-            VerifyCheckConstraint(table, "([Id]>(0))");
+            VerifyCheckConstraint(table, "([Id]>(25))");
         }
 
         [Fact]
