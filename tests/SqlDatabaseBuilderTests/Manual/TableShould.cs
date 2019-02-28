@@ -61,7 +61,12 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 
                 using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
                 {
-                    string sql = $"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsPrimaryKey') = 1 AND TABLE_NAME = '{tableName}'";
+                    string sql = $@"
+                        SELECT COLUMN_NAME 
+                        FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+                        WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsPrimaryKey') = 1 
+                            AND TABLE_NAME = '{tableName}'";
+
                     sqlCommand.CommandText = sql;
                     string primaryKeycolumnNameResult = (string)sqlCommand.ExecuteScalar();
                     Assert.Equal(PrimaryKeyColumnName, primaryKeycolumnNameResult);
@@ -70,37 +75,6 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                     sqlCommand.CommandText = sql;
                     int columnCount = (int)sqlCommand.ExecuteScalar();
                     Assert.Equal(2, columnCount);
-                }
-
-                table.Drop(sqlConnection);
-                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
-            }
-        }
-
-        [Fact]
-        public void CreateTableWithSingleCheckConstraint()
-        {
-            const string COLUMN_NAME = "Id";
-            string tableName = nameof(CreateTableWithSingleCheckConstraint);
-
-            Table table = new Table(tableName);
-            Column column = new Column(COLUMN_NAME, DataType.Int());
-            table.Columns.Add(column);
-
-            CheckConstraint checkConstraint = new CheckConstraint(column, CheckOperator.GreaterThanOrEquals, "0");
-            table.Constraints.Add(checkConstraint);
-
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-            {
-                sqlConnection.Open();
-                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
-                table.Create(sqlConnection);
-                Assert.True(table.IsTablePresentInDatabase(sqlConnection));
-
-                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
-                {
-                    string sql = $"";
-                    sqlCommand.CommandText = sql;
                 }
 
                 table.Drop(sqlConnection);
