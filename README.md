@@ -206,7 +206,7 @@ To allow naming of a CHECK constraint, and for defining a CHECK constraint on mu
                         .And(city, CheckOperator.Equals, "'Seattle'")
     };
 ```
-For the more comples expressions:
+For even more complex expressions:
 ```csharp
     CheckConstraint checkConstraint = new CheckConstraint("CHK_PersonAgeCity")
     {
