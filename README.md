@@ -180,21 +180,21 @@ The sorting order can also be defined like this:
 # SQL CHECK Constraint
 The CHECK constraint is used to limit the value range that can be placed in a column.
 ```csharp
-	Table table = new Table("Persons");
-	Column id = new Column("Id", DataType.Int()) { Nullable = false };
-	Column lastName = new Column("LastName", DataType.VarChar(255));
-	Column firstName = new Column("FirstName", DataType.VarChar(255));
-	Column age = new Column("Age", DataType.Int());
-	Column city = new Column("City", DataType.VarChar(255));
-	table.Columns.AddAll(id, lastName, firstName, age, city);
+    Table table = new Table("Persons");
+    Column id = new Column("Id", DataType.Int()) { Nullable = false };
+    Column lastName = new Column("LastName", DataType.VarChar(255));
+    Column firstName = new Column("FirstName", DataType.VarChar(255));
+    Column age = new Column("Age", DataType.Int());
+    Column city = new Column("City", DataType.VarChar(255));
+    table.Columns.AddAll(id, lastName, firstName, age, city);
 
-	CheckExpression checkExpression = new CheckExpression(age, CheckOperator.GreaterThanOrEquals, "18");
-	CheckConstraint checkConstraint = new CheckConstraint(checkExpression);
-	table.Constraints.Add(checkConstraint);
+    CheckExpression checkExpression = new CheckExpression(age, CheckOperator.GreaterThanOrEquals, "18");
+    CheckConstraint checkConstraint = new CheckConstraint(checkExpression);
+    table.Constraints.Add(checkConstraint);
 
-	using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
-	{
-		sqlConnection.Open();
-		table.Create(sqlConnection);
-	}
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
+    {
+        sqlConnection.Open();
+        table.Create(sqlConnection);
+    }
 ```
