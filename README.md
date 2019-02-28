@@ -198,3 +198,18 @@ The CHECK constraint is used to limit the value range that can be placed in a co
         table.Create(sqlConnection);
     }
 ```
+To allow naming of a CHECK constraint, and for defining a CHECK constraint on multiple columns, use the following:
+```csharp
+    CheckConstraint checkConstraint = new CheckConstraint("CHK_PersonAgeCity")
+    {
+        CheckExpression = new CheckExpression(age, CheckOperator.GreaterThanOrEquals, "18")
+                        .And(city, CheckOperator.Equals, "'Seattle'")
+    };
+```
+For the more comples expressions:
+```csharp
+    CheckConstraint checkConstraint = new CheckConstraint("CHK_PersonAgeCity")
+    {
+        CheckExpression = new CheckExpression("(City IN ('Sealttle','Kansas City','Dallas') OR UPPER(FirstName) LIKE 'J%') AND Address IS NOT NULL")
+    };
+```
