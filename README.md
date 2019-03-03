@@ -8,7 +8,7 @@ Xtrimmer SqlDatabaseBuilder is a simple library designed to help you build a Sql
 
 # New Features!
 
-  - Added Primary Key, Foreign key and Unique Key table constraint support
+  - Added Primary Key, Foreign key, Unique Key, and Check constraint support
 
 # SQL CREATE DATABASE
 The DATABASE object is used to create a new SQL database.
