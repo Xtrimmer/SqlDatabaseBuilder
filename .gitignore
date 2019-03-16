@@ -268,3 +268,6 @@ FakesAssemblies/
 
 # Sonar statai scanner files
 *.sonarqube
+
+# Mac-specific files to ignore
+.DS_Store
