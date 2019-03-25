@@ -214,7 +214,7 @@ For even more complex expressions:
         CheckExpression = new CheckExpression("(City IN ('Sealttle','Kansas City','Dallas') OR UPPER(FirstName) LIKE 'J%') AND Address IS NOT NULL")
     };
 ```
-# SQL SQL CREATE INDEX
+# SQL CREATE INDEX
 The CREATE INDEX statement is used to create indexes in tables.
 ```csharp
     Index index = new Index("IndexName", table, column1, column2);
