@@ -2,7 +2,6 @@
 using System.Data.SqlClient;
 using Xtrimmer.SqlDatabaseBuilder;
 using Xunit;
-using UniqueConstraint = Xtrimmer.SqlDatabaseBuilder.UniqueConstraint;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
@@ -71,7 +70,12 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                     string primaryKeycolumnNameResult = (string)sqlCommand.ExecuteScalar();
                     Assert.Equal(PrimaryKeyColumnName, primaryKeycolumnNameResult);
 
-                    sql = $"SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsUniqueCnst') = 1 AND TABLE_NAME = '{tableName}'";
+                    sql = $@"
+                        SELECT COUNT(COLUMN_NAME) 
+                        FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+                        WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsUniqueCnst') = 1 
+                            AND TABLE_NAME = '{tableName}'";
+
                     sqlCommand.CommandText = sql;
                     int columnCount = (int)sqlCommand.ExecuteScalar();
                     Assert.Equal(2, columnCount);

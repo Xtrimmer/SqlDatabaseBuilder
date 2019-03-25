@@ -9,6 +9,7 @@ Xtrimmer SqlDatabaseBuilder is a simple library designed to help you build a Sql
 # New Features!
 
   - Added Primary Key, Foreign key and Unique Key table constraint support
+  - Added Index support
 
 # SQL CREATE DATABASE
 The DATABASE object is used to create a new SQL database.
@@ -212,4 +213,27 @@ For even more complex expressions:
     {
         CheckExpression = new CheckExpression("(City IN ('Sealttle','Kansas City','Dallas') OR UPPER(FirstName) LIKE 'J%') AND Address IS NOT NULL")
     };
+```
+# SQL SQL CREATE INDEX
+The CREATE INDEX statement is used to create indexes in tables.
+```csharp
+    Index index = new Index("IndexName", table, column1, column2);
+
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
+    {
+        sqlConnection.Open();
+        index.Create(sqlConnection);
+    }
+```
+To create a clustered and/or unique index
+```csharp
+    Index index = new Index("IndexName", table, column1, column2)
+    {
+        IndexType = IndexType.CLUSTERED,
+        IsUnique = true
+    };
+```
+To set column sort orders
+```csharp
+    Index index = new Index("IndexName", table, Tuple.Create(column1, ColumnSort.DESC));
 ```

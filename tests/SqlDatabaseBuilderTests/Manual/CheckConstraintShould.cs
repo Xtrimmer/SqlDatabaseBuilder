@@ -4,7 +4,7 @@ using Xtrimmer.SqlDatabaseBuilder;
 using Xtrimmer.SqlDatabaseBuilderTests;
 using Xunit;
 
-namespace SqlDatabaseBuilderTests.Manual
+namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class CheckConstraintShould
     {
