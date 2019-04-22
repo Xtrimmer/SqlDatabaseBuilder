@@ -1,5 +1,9 @@
 # Xtrimmer SqlDatabaseBuilder
 
+Contributors:
+  - Jeff Trimmer
+  - Mauricio Beithia
+  
 Xtrimmer SqlDatabaseBuilder is a simple library designed to help you build a Sql Server database using C#.
 
   - Write some SqlDatabaseBuilder code
