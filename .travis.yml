@@ -10,7 +10,7 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: dotnet nuget push src/SampleNetLib/bin/Release/SampleNetLib.*.nupkg --api-key
+  script: dotnet nuget push src/SqlDatabaseBuilder/bin/Release/SqlDatabaseBuilder.*.nupkg --api-key
     $NUGET_API_KEY
   on:
     tags: true
