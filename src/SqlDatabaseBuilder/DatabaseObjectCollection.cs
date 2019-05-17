@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class DatabaseObjectCollection<T> where T : DatabaseObject
-    {        
+    {
         protected List<T> list = new List<T>();
 
         public virtual DatabaseObjectCollection<T> Add(T item)

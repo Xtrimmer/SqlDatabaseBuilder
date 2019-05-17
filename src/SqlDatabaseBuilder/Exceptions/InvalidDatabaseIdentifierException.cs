@@ -20,7 +20,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
         }
 
-        protected InvalidDatabaseIdentifierException(SerializationInfo info, StreamingContext context) 
+        protected InvalidDatabaseIdentifierException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

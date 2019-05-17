@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xtrimmer.SqlDatabaseBuilder
+﻿namespace Xtrimmer.SqlDatabaseBuilder
 {
     internal class Time : Temporal
     {
@@ -17,7 +12,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         internal Time(int scale)
         {
-            Scale = scale;    
+            Scale = scale;
         }
 
         internal int Scale

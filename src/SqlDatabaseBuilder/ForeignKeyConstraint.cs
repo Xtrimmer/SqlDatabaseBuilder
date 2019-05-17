@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Xtrimmer.SqlDatabaseBuilder
 {
@@ -25,7 +24,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
             Array.ForEach(columns, c => this.localColumns.Add(c));
             return this;
-              
+
         }
 
         public ForeignKeyConstraint References(Table table)

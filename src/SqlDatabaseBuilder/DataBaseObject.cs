@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
-
-namespace Xtrimmer.SqlDatabaseBuilder
+﻿namespace Xtrimmer.SqlDatabaseBuilder
 {
     public abstract class DatabaseObject
     {
@@ -20,6 +15,6 @@ namespace Xtrimmer.SqlDatabaseBuilder
             Name = name;
         }
 
-        internal abstract string SqlDefinition {get;}
+        internal abstract string SqlDefinition { get; }
     }
 }

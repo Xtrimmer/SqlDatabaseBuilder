@@ -10,17 +10,17 @@ namespace Xtrimmer.SqlDatabaseBuilder
         {
         }
 
-        public InvalidTableDefinitionException(string message) 
+        public InvalidTableDefinitionException(string message)
             : base(message)
         {
         }
 
-        public InvalidTableDefinitionException(string message, Exception innerException) 
+        public InvalidTableDefinitionException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        protected InvalidTableDefinitionException(SerializationInfo info, StreamingContext context) 
+        protected InvalidTableDefinitionException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

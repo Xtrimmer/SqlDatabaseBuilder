@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xtrimmer.SqlDatabaseBuilder
+﻿namespace Xtrimmer.SqlDatabaseBuilder
 {
     class DateTime2 : Temporal
     {
@@ -33,7 +28,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
         public override string Definition
         {
             get
-            {                
+            {
                 string precisionSpecification = Precision == DEFAULT_PRECISION ? "" : $"({Precision})";
                 return $"datetime2{precisionSpecification}";
             }
