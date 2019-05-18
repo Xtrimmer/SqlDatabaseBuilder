@@ -43,7 +43,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 
         private void VerifyUniqueConstraint(string TableName, Table table)
         {
-            Console.WriteLine($"keyword={connectionString}");
+            Console.WriteLine($"keyword={connectionString}".Replace(".", "-"));
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
