@@ -10,7 +10,7 @@
     <Description>SqlDatabaseBuilder is used to create database resources in a Sql Server database from within a C# application.</Description>
     <PackageTags>SqlServer;Database;SQL;</PackageTags>
     <RepositoryUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</RepositoryUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <IncludeSource>true</IncludeSource>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
-    <None Include="License/LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+    <None Include="License/LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
   </ItemGroup>
 
 </Project>
