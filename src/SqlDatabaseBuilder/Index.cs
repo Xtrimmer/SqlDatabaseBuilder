@@ -7,8 +7,8 @@ namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class Index : DatabaseResource
     {
-        private Table table;
-        private List<Tuple<Column, ColumnSort>> columns = new List<Tuple<Column, ColumnSort>>();
+        private readonly Table table;
+        private readonly List<Tuple<Column, ColumnSort>> columns = new List<Tuple<Column, ColumnSort>>();
 
         public Index(string name, Table table, params Column[] columns) :
             this(name, table, columns.Select(c => Tuple.Create(c, ColumnSort.ASC)).ToArray())
