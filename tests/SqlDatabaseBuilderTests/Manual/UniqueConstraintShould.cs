@@ -43,6 +43,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 
         private void VerifyUniqueConstraint(string TableName, Table table)
         {
+            Console.WriteLine(connectionString);
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
