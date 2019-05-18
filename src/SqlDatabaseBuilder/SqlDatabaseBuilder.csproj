@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
-    <None Include="LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+    <None Include="License/LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)"/>
   </ItemGroup>
 
 </Project>
