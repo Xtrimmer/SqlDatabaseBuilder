@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/Xtrimmer/SqlDatabaseBuilder.svg?branch=master)](https://travis-ci.com/Xtrimmer/SqlDatabaseBuilder)
 [![NuGet Version](https://badge.fury.io/nu/SqlDatabaseBuilder.svg)](https://badge.fury.io/nu/SqlDatabaseBuilder)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=alert_status)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
 # Xtrimmer SqlDatabaseBuilder
 
 Contributors:
