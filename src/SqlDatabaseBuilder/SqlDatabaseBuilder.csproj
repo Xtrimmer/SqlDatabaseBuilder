@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>SqlDatabaseBuilder</PackageId>
     <PackageVersion>0.0.1</PackageVersion>
+    <PackageId>SqlDatabaseBuilder</PackageId>
     <Authors>Xtrimmer</Authors>
     <Owners>Xtrimmer</Owners>
     <Title>SQL Server Database Builder</Title>
-    <Description>Create database resources in a Sql Server database.</Description>
-    <ProjectUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</ProjectUrl>
-    <LicenseUrl>https://raw.githubusercontent.com/Xtrimmer/SqlDatabaseBuilder/master/LICENSE</LicenseUrl>
+    <Description>SqlDatabaseBuilder is used to create database resources in a Sql Server database from within a C# application.</Description>
+    <PackageTags>SqlServer;Database;SQL;</PackageTags>
+    <RepositoryUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <IncludeSource>true</IncludeSource>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
