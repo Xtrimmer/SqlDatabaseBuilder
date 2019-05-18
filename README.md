@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Xtrimmer/SqlDatabaseBuilder.svg?branch=master)](https://travis-ci.org/Xtrimmer/SqlDatabaseBuilder)
+[![NuGet Version](https://badge.fury.io/nu/SqlDatabaseBuilder.svg)](https://badge.fury.io/nu/SqlDatabaseBuilder)
 # Xtrimmer SqlDatabaseBuilder
 
 Contributors:
