@@ -42,5 +42,7 @@
 
         public abstract string Definition { get; }
         public abstract int Size { get; }
+        public override bool Equals(object obj) => GetType().Equals(obj.GetType());
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 }

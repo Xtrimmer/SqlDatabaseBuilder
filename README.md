@@ -222,6 +222,23 @@ For even more complex expressions:
         CheckExpression = new CheckExpression("(City IN ('Sealttle','Kansas City','Dallas') OR UPPER(FirstName) LIKE 'J%') AND Address IS NOT NULL")
     };
 ```
+# SQL DEFAULT Contraint
+The DEFAULT constraint is used to provide a default value for a column. The default value will be added to all new records IF no other value is specified.
+To add a DEFAULT contraint use:
+```csharp
+Table table = new Table("Persons");
+Column id = new Column("Id", DataType.Int());
+Column lastName = new Column("LastName", DataType.VarChar(255)) { Default = new Default("Doe") }; 
+Column firstName = new Column("FirstName", DataType.VarChar(255)) { Default = new Default("John") }; 
+Column age = new Column("Age", DataType.Int()) { Default = new Default(18) };
+table.Columns.AddAll(id, lastName, firstName, age);
+```
+To add a DEFAULT constraint with a name use: 
+```csharp
+Column lastName = new Column("LastName", DataType.VarChar(255)) { Default = new Default("defaultLastName", "Doe") }; 
+Column firstName = new Column("FirstName", DataType.VarChar(255)) { Default = new Default("defalutFistName", "John") }; 
+Column age = new Column("Age", DataType.Int()) { Default = new Default("defaultAge", 18) };
+```
 # SQL CREATE INDEX
 The CREATE INDEX statement is used to create indexes in tables.
 ```csharp
