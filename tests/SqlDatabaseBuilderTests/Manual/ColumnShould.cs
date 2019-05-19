@@ -86,6 +86,40 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         }
 
         [Fact]
+        public void SetSystemValuesByUsingFunctions()
+        {
+            string tableName = nameof(SetSystemValuesByUsingFunctions);
+            DateTime expectedDate = DateTime.Today;
+            Table table = new Table(tableName);
+            table.Columns.Add(new Column("DefaultDate", DataType.Date()) { Default = new Default("GETDATE()") });
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
+                table.Create(sqlConnection);
+                Assert.True(table.IsTablePresentInDatabase(sqlConnection));
+
+                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+                {
+                    string sql = $"INSERT {tableName} DEFAULT VALUES";
+                    sqlCommand.CommandText = sql;
+                    int rowsUpdated = sqlCommand.ExecuteNonQuery();
+                    Assert.Equal(1, rowsUpdated);
+                }
+
+                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+                {
+                    string sql = $"SELECT * FROM {tableName}";
+                    sqlCommand.CommandText = sql;
+                    DateTime actualDate = (DateTime)sqlCommand.ExecuteScalar();
+                    Assert.Equal(expectedDate, actualDate);
+                }
+                table.Drop(sqlConnection);
+            }
+        }
+
+        [Fact]
         public void AddDefaultConstraintWithName()
         {
             string expectedDefaultName = "testDefault";

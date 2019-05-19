@@ -226,18 +226,22 @@ For even more complex expressions:
 The DEFAULT constraint is used to provide a default value for a column. The default value will be added to all new records IF no other value is specified.
 To add a DEFAULT contraint use:
 ```csharp
-Table table = new Table("Persons");
-Column id = new Column("Id", DataType.Int());
-Column lastName = new Column("LastName", DataType.VarChar(255)) { Default = new Default("Doe") }; 
-Column firstName = new Column("FirstName", DataType.VarChar(255)) { Default = new Default("John") }; 
-Column age = new Column("Age", DataType.Int()) { Default = new Default(18) };
-table.Columns.AddAll(id, lastName, firstName, age);
+    Table table = new Table("Persons");
+    Column id = new Column("Id", DataType.Int());
+    Column lastName = new Column("LastName", DataType.VarChar(255)) { Default = new Default("Doe") }; 
+    Column firstName = new Column("FirstName", DataType.VarChar(255)) { Default = new Default("John") }; 
+    Column age = new Column("Age", DataType.Int()) { Default = new Default(18) };
+    table.Columns.AddAll(id, lastName, firstName, age);
 ```
 To add a DEFAULT constraint with a name use: 
 ```csharp
-Column lastName = new Column("LastName", DataType.VarChar(255)) { Default = new Default("defaultLastName", "Doe") }; 
-Column firstName = new Column("FirstName", DataType.VarChar(255)) { Default = new Default("defalutFistName", "John") }; 
-Column age = new Column("Age", DataType.Int()) { Default = new Default("defaultAge", 18) };
+    Column lastName = new Column("LastName", DataType.VarChar(255)) { Default = new Default("defaultLastName", "Doe") }; 
+    Column firstName = new Column("FirstName", DataType.VarChar(255)) { Default = new Default("defalutFirstName", "John") }; 
+    Column age = new Column("Age", DataType.Int()) { Default = new Default("defaultAge", 18) };
+```
+The DEFAULT constraint can also be used to insert system values, by using functions like GETDATE(): 
+```csharp
+    Column date = new Column("Date", DataType.Date()) { Default = new Default("GETDATE()") }
 ```
 # SQL CREATE INDEX
 The CREATE INDEX statement is used to create indexes in tables.
