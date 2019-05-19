@@ -3,7 +3,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class Default : DatabaseObject
     {
-        private object value;
+        private readonly object value;
 
         public Default(object value) : this(null, value) { }
 
