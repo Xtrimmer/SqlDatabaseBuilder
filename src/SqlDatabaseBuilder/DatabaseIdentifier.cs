@@ -1,9 +1,4 @@
-﻿using Xtrimmer.SqlDatabaseBuilder;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xtrimmer.SqlDatabaseBuilder
+﻿namespace Xtrimmer.SqlDatabaseBuilder
 {
     internal class DatabaseIdentifier
     {
@@ -12,7 +7,8 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         internal string Name { get; }
 
-        public DatabaseIdentifier(string name) {            
+        public DatabaseIdentifier(string name)
+        {
             if (name != null && !IsValidLength(name)) throw new InvalidDatabaseIdentifierException($"Identifiers must contain from {MIN_ID_LENGTH} through {MAX_ID_LENGTH} characters.");
             Name = name;
         }

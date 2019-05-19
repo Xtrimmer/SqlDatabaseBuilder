@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
 namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class ConstraintCollection : DatabaseObjectCollection<Constraint>
-    { 
+    {
         public override DatabaseObjectCollection<Constraint> Add(Constraint item)
         {
             item.ThrowIfNull(nameof(item));

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using Xtrimmer.SqlDatabaseBuilder;
 using Xunit;
 
@@ -67,7 +65,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 
                         sqlCommand.CommandText = sql;
                         using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                        { 
+                        {
                             while (sqlDataReader.Read())
                             {
                                 Assert.Equal(table.Name, sqlDataReader.GetString(0));

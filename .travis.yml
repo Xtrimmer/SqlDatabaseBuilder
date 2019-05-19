@@ -1,0 +1,21 @@
+language: csharp
+mono: none
+os: linux
+dist: xenial
+dotnet: 2.2
+script:
+- dotnet build -c Release
+- dotnet test
+- dotnet pack -c Release
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: dotnet nuget push src/SqlDatabaseBuilder/bin/Release/SqlDatabaseBuilder.*.nupkg
+    --api-key $NUGET_API_KEY
+  on:
+    tags: true
+    condition: "$TRAVIS_TAG =~ ^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$"
+env:
+  global:
+  - secure: BPhCLYI8eL7lk/7NQ0FG6z4o2Af9cpyE5zwLnFQSX0N/etURhhWqjsP7t1OCz5XxVv6vR1VLfcWnhwn3LL3HqbnbPp0wqllJuCQ9NZ80d66/2xVpmqvabhepZW8J/5zzxykC1dBAts5bpIZZb/P+gcnpsB3dxPWWmvY3maPQWv4KNkWzpCAh5fFc5Fg6I2WDg9E3GkD7TAalfMm/KWDPg6rx5XblQJwtNm0VmpkWPLVD7lBim++Z9pvEl0mh6qQEqnsUZJMdKP+TH7R3T8X3SlLGvnxq08PGYXu0cwrbh5Zo8iqDwZsX6lLmwbYo/S3gd2NxF75wxowSiDMoVC18iiQxSNpHyMYrOQ6N2HubNw8kt9HBR+2vsQ87nG0g5/8jxYCfhbir4T+jypudLtx/EeJxKssJeBRFWsVn52COlqvJjDpfZxHGeZyvs9akIDKJPo4//bpj0Gkx6xCUA0FQ4YUemA4Ql2dU6a8+gUF8wkH2Ajt8ZvHb7x58vDaEYw//uawKzfd1WAPg9safCimJ6TZJqhi0r2mS+8m/NsNIuWP5iMu8lQkTu1M2DmvuhVIv6xIsjBYgY8kw9MkRB5pAO4WgXU9NtS8PKZltahCRBcIQADDmvVQH1HPm58sefe48R3dZ6PRY3F8kRqVRc63CRH41t5nb2hOfLrPG6MbXwdU=
+  - secure: Ibo8GcjuzkRnJYrbkMqPBlyzLwiF50qzdmdCOwjeJEmAkypV3t/WFWZmlyVj8k3kKRcf/1DhwkOHf5oYd3MIB+qA5O9J855XH23h/msqis1y5HOGknz5i7pgTuYBLqkayEOToIvAV2wyhqma0W0dyFnjGXOQe5HiMRvEp4EKrelJJQDwH210w/Btw8UUqyadjG2HVKh49ibCIqcNEcDEzRsT4iwdzRFB7bzbk7Cwo4B8lvs9Xd/bdlf12RJU3DJjYBhj1yPcbhwu4Pqjg3PiNYvaewly9neTVXGDoGxi1/XzS/J3/NNWu8xQAJGeekwOzmn16NafQKupP84HBd3+aAzMgHnD18rkl7aaj+RcESAX+5ic2mOaA2nvN/wMeIZP7eSs8RnTEviaW9P7JborUjKqnuFAccHATm9SRuJ9ARvkBFTjpE45hP5pg4xvA73U5GTp4l7uPMAArtIuo68dxV1WeYkyAmj1pnDdwNh2q7GDrLnpQo7PsW+S6lDPJTWTYItEVW6KVqtzlR7DoKljNCt2ZtWrXj30LEr/mZwNsmAT6TQrA+iEqpo52dUH56uVbA7x+h/iAl2ZUIKmKJHpinL6hXUQmZV/SpLlmr8ZA2Y7gg2PP7Nw66NkbizASnQw2z7USwyHGSDIhi4U0CeM3JxJeDzujWNBfuv/Zc5u6nE=

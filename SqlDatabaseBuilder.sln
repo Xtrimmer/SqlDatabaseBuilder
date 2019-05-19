@@ -14,6 +14,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{74DBA598-77E8-4D09-990A-36980DAF1C69}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.travis.yml = .travis.yml
+		NuGet.Config = NuGet.Config
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -25,12 +27,12 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E07501CD-1FD7-4D66-B51E-EF38E32ED67E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CAFA451E-8FA1-4283-8119-B8A2B7469400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CAFA451E-8FA1-4283-8119-B8A2B7469400}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CAFA451E-8FA1-4283-8119-B8A2B7469400}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{CAFA451E-8FA1-4283-8119-B8A2B7469400}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{CAFA451E-8FA1-4283-8119-B8A2B7469400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAFA451E-8FA1-4283-8119-B8A2B7469400}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

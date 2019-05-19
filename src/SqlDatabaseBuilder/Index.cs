@@ -7,11 +7,12 @@ namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class Index : DatabaseResource
     {
-        private Table table;
-        private List<Tuple<Column, ColumnSort>> columns = new List<Tuple<Column, ColumnSort>>();
+        private readonly Table table;
+        private readonly List<Tuple<Column, ColumnSort>> columns = new List<Tuple<Column, ColumnSort>>();
 
         public Index(string name, Table table, params Column[] columns) :
-            this(name, table, columns.Select(c => Tuple.Create(c, ColumnSort.ASC)).ToArray()) { }
+            this(name, table, columns.Select(c => Tuple.Create(c, ColumnSort.ASC)).ToArray())
+        { }
 
         public Index(string name, Table table, params Tuple<Column, ColumnSort>[] columns) : base(name)
         {
@@ -37,7 +38,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
                 string indexType = IndexType.ToString();
                 string columnDefinitions = string.Join(", ", columns.Select(t => $"[{t.Item1.Name}] {t.Item2.ToString()}").ToList());
                 return $"CREATE {uniqueness}{indexType} INDEX [{Name}] ON [{table.Name}] ({columnDefinitions})";
-            }            
+            }
         }
 
         public override void Create(SqlConnection sqlConnection)
