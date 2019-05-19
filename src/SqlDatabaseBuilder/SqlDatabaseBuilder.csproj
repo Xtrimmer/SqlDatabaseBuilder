@@ -7,7 +7,7 @@
     <Authors>Jeff Trimmer,Mauricio Beithia</Authors>
     <Owners>Jeff Trimmer</Owners>
     <Title>SQL Server Database Builder</Title>
-    <Description>SqlDatabaseBuilder is used to create database resources in a Sql Server database from within a C# application.</Description>
+    <Description>SqlDatabaseBuilder is a lightweight library used to add and remove database resources in a Sql Server database from within a C# application.</Description>
     <PackageTags>SqlServer;Database;SQL;</PackageTags>
     <RepositoryUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</RepositoryUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
