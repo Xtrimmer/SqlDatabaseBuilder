@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>0.0.1</PackageVersion>
+    <PackageVersion>0.0.2</PackageVersion>
     <PackageId>SqlDatabaseBuilder</PackageId>
-    <Authors>Xtrimmer</Authors>
-    <Owners>Xtrimmer</Owners>
+    <Authors>Jeff Trimmer,Mauricio Beithia</Authors>
+    <Owners>Jeff Trimmer</Owners>
     <Title>SQL Server Database Builder</Title>
     <Description>SqlDatabaseBuilder is used to create database resources in a Sql Server database from within a C# application.</Description>
     <PackageTags>SqlServer;Database;SQL;</PackageTags>
