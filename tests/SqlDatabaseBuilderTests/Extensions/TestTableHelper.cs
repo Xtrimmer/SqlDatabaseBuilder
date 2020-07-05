@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 using Xtrimmer.SqlDatabaseBuilder;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests
@@ -16,6 +14,21 @@ namespace Xtrimmer.SqlDatabaseBuilderTests
                 string sql = "SELECT object_id FROM sys.tables WHERE name = @tableName";
                 sqlCommand.CommandText = sql;
                 sqlCommand.Parameters.Add(new SqlParameter("tableName", tableName));
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    return reader.HasRows;
+                }
+            }
+        }
+
+        public static bool IsColumnMasterKeyPresentInDatabase(this ColumnMasterKey cmk, SqlConnection sqlConnection)
+        {
+            using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+            {
+                string cmkName = cmk.Name;
+                string sql = "SELECT column_master_key_id from sys.column_master_keys where name = @cmkName";
+                sqlCommand.CommandText = sql;
+                sqlCommand.Parameters.Add(new SqlParameter("cmkName", cmkName));
                 using (SqlDataReader reader = sqlCommand.ExecuteReader())
                 {
                     return reader.HasRows;

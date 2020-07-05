@@ -271,3 +271,5 @@ FakesAssemblies/
 
 # Mac-specific files to ignore
 .DS_Store
+Sonar.txt
+workspace.bat
