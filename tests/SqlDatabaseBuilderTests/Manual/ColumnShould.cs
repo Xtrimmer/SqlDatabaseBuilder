@@ -89,7 +89,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         public void SetSystemValuesByUsingFunctions()
         {
             string tableName = nameof(SetSystemValuesByUsingFunctions);
-            DateTime expectedDate = DateTime.Today;
+            DateTime expectedDate = DateTime.UtcNow.Date;
             Table table = new Table(tableName);
             table.Columns.Add(new Column("DefaultDate", DataType.Date()) { Default = new Default("GETDATE()") });
 
