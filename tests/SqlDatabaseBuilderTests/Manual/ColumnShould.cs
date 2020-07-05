@@ -9,7 +9,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class ColumnShould
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
 
         [Fact]
         public void DefineDataTypesCorrectly()
@@ -75,7 +75,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         private static void VerifyDefaultValueIsWhatWasDefined(SqlDataReader dataReader, object[] expectedValues, int i)
         {
             object result = dataReader[i];
-            if (result is bool && (bool)result == false) result = 0;
+            if (result is bool && !(bool)result) result = 0;
             object expected = expectedValues[i];
             if (expected is string) expected = ((string)expected).Replace("'", "");
             if (result is byte[]) expected = new byte[] { (byte)expected };
@@ -150,8 +150,10 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             object actualDefaultName;
             int length = defaultValue == null ? 1 : defaultValue.Length;
             Table table = new Table(tableName);
-            Column column = new Column(columnName, DataType.VarChar(length));
-            column.Default = new Default(defaultName, defaultValue);
+            Column column = new Column(columnName, DataType.VarChar(length))
+            {
+                Default = new Default(defaultName, defaultValue)
+            };
             table.Columns.Add(column);
 
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))

@@ -21,14 +21,29 @@ namespace Xtrimmer.SqlDatabaseBuilderTests
             }
         }
 
-        public static bool IsColumnMasterKeyPresentInDatabase(this ColumnMasterKey cmk, SqlConnection sqlConnection)
+        public static bool IsColumnMasterKeyPresentInDatabase(this ColumnMasterKey columnMasterKey, SqlConnection sqlConnection)
         {
             using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
             {
-                string cmkName = cmk.Name;
+                string cmkName = columnMasterKey.Name;
                 string sql = "SELECT column_master_key_id from sys.column_master_keys where name = @cmkName";
                 sqlCommand.CommandText = sql;
                 sqlCommand.Parameters.Add(new SqlParameter("cmkName", cmkName));
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    return reader.HasRows;
+                }
+            }
+        }
+
+        public static bool IsColumnEncryptionKeyPresentInDatabase(this ColumnEncryptionKey columnEncryptionKey, SqlConnection sqlConnection)
+        {
+            using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+            {
+                string cekName = columnEncryptionKey.Name;
+                string sql = "SELECT column_encryption_key_id from sys.column_encryption_keys where name = @cekName";
+                sqlCommand.CommandText = sql;
+                sqlCommand.Parameters.Add(new SqlParameter("cekName", cekName));
                 using (SqlDataReader reader = sqlCommand.ExecuteReader())
                 {
                     return reader.HasRows;

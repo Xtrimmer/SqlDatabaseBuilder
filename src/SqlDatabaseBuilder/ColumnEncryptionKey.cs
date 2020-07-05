@@ -8,6 +8,9 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         public string EncryptedValue { get; set; }
 
+        public ColumnEncryptionKey(string keyName, ColumnMasterKey columnMasterKey, string encryptedValue)
+            : this(keyName, columnMasterKey.Name, encryptedValue) { }
+
         public ColumnEncryptionKey(string keyName, string columnMasterKeyName, string encryptedValue) : base(keyName)
         {
             ColumnMasterKeyName = columnMasterKeyName;
@@ -16,14 +19,24 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         public override void Create(SqlConnection sqlConnection)
         {
-            throw new System.NotImplementedException();
+            sqlConnection.ThrowIfNull(nameof(sqlConnection));
+            using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+            {
+                sqlCommand.CommandText = SqlDefinition;
+                sqlCommand.ExecuteNonQuery();
+            }
         }
 
         public override void Drop(SqlConnection sqlConnection)
         {
-            throw new System.NotImplementedException();
+            sqlConnection.ThrowIfNull(nameof(sqlConnection));
+            using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+            {
+                sqlCommand.CommandText = $"DROP COLUMN ENCRYPTION KEY [{Name}];";
+                sqlCommand.ExecuteNonQuery();
+            }
         }
 
-        internal override string SqlDefinition => throw new System.NotImplementedException();
+        internal override string SqlDefinition => $"CREATE COLUMN ENCRYPTION KEY [{Name}] WITH VALUES (COLUMN_MASTER_KEY = {ColumnMasterKeyName}, ALGORITHM = 'RSA_OAEP', ENCRYPTED_VALUE = {EncryptedValue})";
     }
 }

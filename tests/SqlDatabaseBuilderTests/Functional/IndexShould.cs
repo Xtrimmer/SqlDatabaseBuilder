@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xtrimmer.SqlDatabaseBuilder;
 using Xunit;
 
-namespace SqlDatabaseBuilderTests.Functional
+namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
 {
     public class IndexShould
     {
-        Column column = new Column("testColumn", DataType.Int());
-        Table table = new Table("TestTable");
+        readonly Column column = new Column("testColumn", DataType.Int());
 
         [Fact]
         public void ThrowExceptionIfTableNull()
