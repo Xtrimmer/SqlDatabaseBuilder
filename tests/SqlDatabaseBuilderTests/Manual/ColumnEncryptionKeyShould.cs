@@ -22,16 +22,16 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                Assert.False(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection));
-                Assert.False(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection));
+                Assert.False(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection), "ColumnMasterKey should not exist in the database.");
+                Assert.False(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection), "ColumnEncryptionKey should not exist in the database.");
                 columnMasterKey.Create(sqlConnection);
                 columnEncryptionKey.Create(sqlConnection);
-                Assert.True(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection));
-                Assert.True(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection));
+                Assert.True(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection), "ColumnMasterKey should exist in the database.");
+                Assert.True(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection), "ColumnEncryptionKey should exist in the database.");
                 columnEncryptionKey.Drop(sqlConnection);
                 columnMasterKey.Drop(sqlConnection);
-                Assert.False(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection));
-                Assert.False(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection));
+                Assert.False(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection), "ColumnMasterKey should not exist in the database.");
+                Assert.False(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection), "ColumnEncryptionKey should not exist in the database.");
             }
         }
     }

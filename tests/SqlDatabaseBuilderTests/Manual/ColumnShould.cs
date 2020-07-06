@@ -144,6 +144,106 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             Assert.Null(actualDefaultName);
         }
 
+        [Fact]
+        public void AddCollationCorrectly()
+        {
+            string tableName = nameof(AddCollationCorrectly);
+            string columnName = nameof(AddCollationCorrectly) + "Column";
+            string expectedCollation = "Latin1_General_BIN2";
+            Column column = new Column(columnName, DataType.Char())
+            {
+                Collation = expectedCollation
+            };
+
+            Table table = new Table(tableName);
+            table.Columns.AddAll(column);
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection), "Table should not exist in the database.");
+                table.Create(sqlConnection);
+                Assert.True(table.IsTablePresentInDatabase(sqlConnection), "Table should exist in the database.");
+
+                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+                {
+                    string sql = $"Select collation_name from sys.columns where name = '{columnName}'";
+                    sqlCommand.CommandText = sql;
+                    string actualCollation = (string)sqlCommand.ExecuteScalar();
+                    Assert.Equal(expectedCollation, actualCollation);
+                }
+
+                table.Drop(sqlConnection);
+            }
+        }
+
+        [Fact]
+        public void AddColumnEncryptionCorrectly()
+        {
+            string tableName = nameof(AddColumnEncryptionCorrectly);
+            string columnName1 = tableName + "Column1";
+            string columnName2 = tableName + "Column2";
+            string columnMasterKeyName = tableName + "_CMK";
+            string columnEncryptionName = tableName + "_CEK";
+
+            ColumnMasterKey columnMasterKey = new ColumnMasterKey(columnMasterKeyName, KeyStoreProvider.AzureKeyVaultProvider, "Test/Path");
+            ColumnEncryptionKey columnEncryptionKey = new ColumnEncryptionKey(columnEncryptionName, columnMasterKey.Name, "0x555");
+
+            ColumnEncryption columnEncryption1 = new ColumnEncryption(columnEncryptionKey, ColumnEncryptionType.Deterministic);
+            Column column1 = new Column(columnName1, DataType.Char())
+            {
+                ColumnEncryption = columnEncryption1,
+                Collation = "Latin1_General_BIN2"
+            };
+
+            ColumnEncryption columnEncryption2 = new ColumnEncryption(columnEncryptionKey, ColumnEncryptionType.Randomized);
+            Column column2 = new Column(columnName2, DataType.NVarChar())
+            {
+                ColumnEncryption = columnEncryption2
+            };
+
+            Table table = new Table(tableName);
+            table.Columns.AddAll(column1, column2);
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                Assert.False(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection), "ColumnMasterKey should not exist in the database.");
+                columnMasterKey.Create(sqlConnection);
+                Assert.True(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection), "ColumnMasterKey should exist in the database.");
+                Assert.False(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection), "ColumnEncryptionKey should not exist in the database.");
+                columnEncryptionKey.Create(sqlConnection);
+                Assert.True(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection), "ColumnEncryptionKey should exist in the database.");
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection), "Table should not exist in the database.");
+                table.Create(sqlConnection);
+                Assert.True(table.IsTablePresentInDatabase(sqlConnection), "Table should exist in the database.");
+
+                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+                {
+                    foreach (Column column in table.Columns)
+                    {
+                        string sql = $@"
+                            Select c.encryption_type_desc, k.name
+                            FROM sys.columns c JOIN sys.column_encryption_keys k ON (c.column_encryption_key_id = k.column_encryption_key_id)
+                            WHERE c.name = '{column.Name}'";
+                        sqlCommand.CommandText = sql;
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        { 
+                            while (reader.Read())
+                            {
+                                Assert.Equal(reader.GetString(0), column.ColumnEncryption.ColumnEncryptionType.GetStringValue());
+                                Assert.Equal(reader.GetString(1), column.ColumnEncryption.ColumnEncryptionKeyName);
+                            }
+                        }
+                    }
+                }
+
+                table.Drop(sqlConnection);
+                columnEncryptionKey.Drop(sqlConnection);
+                columnMasterKey.Drop(sqlConnection);
+            }
+        }
+
         private object TestDefaultConstraint(string defaultName, string defaultValue, string tableName)
         {
             string columnName = DataType.VarChar().Definition;
