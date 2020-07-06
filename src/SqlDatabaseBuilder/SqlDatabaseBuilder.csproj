@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>0.0.2</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <PackageId>SqlDatabaseBuilder</PackageId>
     <Authors>Jeff Trimmer,Mauricio Beithia</Authors>
     <Owners>Jeff Trimmer</Owners>
@@ -14,11 +14,21 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <IncludeSource>true</IncludeSource>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>- Added Collation support for table columns.
+  - Added Always Encrypted Column Master Key and Column Encryption Key definitions.
+  - Added Column Encryption support for table columns.
+  - Made DatabaseObjectCollection Enumerable.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
-    <None Include="License/LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+    <None Include="License/LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
 
 </Project>
