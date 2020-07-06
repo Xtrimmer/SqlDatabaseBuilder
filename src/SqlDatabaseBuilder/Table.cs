@@ -14,7 +14,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         public override void Create(SqlConnection sqlConnection)
         {
-            if (Columns.isEmpty()) throw new InvalidTableDefinitionException("Table must specify at least one column.");
+            if (Columns.IsEmpty()) throw new InvalidTableDefinitionException("Table must specify at least one column.");
             sqlConnection.ThrowIfNull(nameof(sqlConnection));
             using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
             {
@@ -40,7 +40,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
             get
             {
                 string columnDefinitions = Columns.SqlDefinition;
-                string constraintDefinitions = Constraints.isEmpty() ? "" : $", {Constraints.SqlDefinition}";
+                string constraintDefinitions = Constraints.IsEmpty() ? "" : $", {Constraints.SqlDefinition}";
                 return $"CREATE TABLE [{Name}] ({columnDefinitions}{constraintDefinitions});";
             }
         }

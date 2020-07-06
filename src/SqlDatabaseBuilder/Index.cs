@@ -36,7 +36,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
             {
                 string uniqueness = IsUnique ? "UNIQUE " : "";
                 string indexType = IndexType.ToString();
-                string columnDefinitions = string.Join(", ", columns.Select(t => $"[{t.Item1.Name}] {t.Item2.ToString()}").ToList());
+                string columnDefinitions = string.Join(", ", columns.Select(t => $"[{t.Item1.Name}] {t.Item2}").ToList());
                 return $"CREATE {uniqueness}{indexType} INDEX [{Name}] ON [{table.Name}] ({columnDefinitions})";
             }
         }
