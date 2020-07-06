@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Xtrimmer.SqlDatabaseBuilder;
-using Xtrimmer.SqlDatabaseBuilderTests;
 using Xunit;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class CheckConstraintShould
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
 
         [Fact]
         public void CreateTableWithSingleCheckConstraint()

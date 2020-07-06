@@ -7,7 +7,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class TableShould
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
 
         [Fact]
         public void CreateAndDropTable()
@@ -41,12 +41,16 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             Column column3 = new Column(UniqueColumnName2, DataType.Money());
             table.Columns.AddAll(column1, column2, column3);
 
-            PrimaryKeyConstraint primaryKeyConstraint = new PrimaryKeyConstraint();
-            primaryKeyConstraint.IndexType = IndexType.NONCLUSTERED;
+            PrimaryKeyConstraint primaryKeyConstraint = new PrimaryKeyConstraint
+            {
+                IndexType = IndexType.NONCLUSTERED
+            };
             primaryKeyConstraint.AddColumn(column1);
 
-            UniqueConstraint uniqueConstraint = new UniqueConstraint();
-            uniqueConstraint.IndexType = IndexType.CLUSTERED;
+            UniqueConstraint uniqueConstraint = new UniqueConstraint
+            {
+                IndexType = IndexType.CLUSTERED
+            };
             uniqueConstraint.AddColumns(Tuple.Create(column2, ColumnSort.DESC), Tuple.Create(column3, ColumnSort.ASC));
 
             table.Constraints.AddAll(primaryKeyConstraint, uniqueConstraint);
