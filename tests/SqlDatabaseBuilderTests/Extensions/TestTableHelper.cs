@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Xtrimmer.SqlDatabaseBuilder;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests
