@@ -24,7 +24,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
 
         public void ForEach(Action<T> action) => list.ForEach(action);
 
-        public bool isEmpty() => !list.Any();
+        public bool IsEmpty() => !list.Any();
 
         public IEnumerator<T> GetEnumerator()
         {
