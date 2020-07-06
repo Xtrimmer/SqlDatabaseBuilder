@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Xtrimmer.SqlDatabaseBuilder
 {
-    public class DatabaseObjectCollection<T> where T : DatabaseObject
+    public class DatabaseObjectCollection<T> : IEnumerable<T> where T : DatabaseObject
     {
         protected List<T> list = new List<T>();
 
@@ -24,6 +25,16 @@ namespace Xtrimmer.SqlDatabaseBuilder
         public void ForEach(Action<T> action) => list.ForEach(action);
 
         public bool isEmpty() => !list.Any();
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
         public T this[int index] => list[index];
 
