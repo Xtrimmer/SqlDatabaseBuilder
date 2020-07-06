@@ -16,10 +16,11 @@ Xtrimmer SqlDatabaseBuilder is a simple library designed to help you build a Sql
 
 # New Features!
 
-  - Added Primary Key, Foreign key, Unique Key, and Check constraint support
-  - Added Index support
-
-# SQL CREATE DATABASE
+  - Added Collation support for table columns.
+  - Added Always Encrypted Column Master Key, Column Encryption Key definitions.
+  - Added Column Encryption support for table columns
+# Database Basics
+## SQL CREATE DATABASE
 The DATABASE object is used to create a new SQL database.
 ```csharp
     Database database = new Database("MyDatabase");
@@ -31,7 +32,7 @@ The DATABASE object is used to create a new SQL database.
     }
 ```
 
-# SQL CREATE TABLE
+## SQL CREATE TABLE
 The Table object is used to create database tables.
 ```csharp
     Table table = new Table("Persons");
@@ -50,7 +51,7 @@ The Table object is used to create database tables.
     }
 ```
 
-# SQL NULL/NOT NULL Constraint
+## SQL NULL/NOT NULL Constraint
 By default, a column can hold NULL values.
 The NOT NULL constraint enforces a column to NOT accept NULL values.
 ```csharp
@@ -76,7 +77,7 @@ The NOT NULL constraint enforces a column to NOT accept NULL values.
     }
 ```
 
-# SQL PRIMARY KEY Constraint
+## SQL PRIMARY KEY Constraint
 The PRIMARY KEY constraint uniquely identifies each record in a table.
 Primary keys must contain UNIQUE values, and cannot contain NULL values.
 A table can have only one primary key, which may consist of single or multiple fields.
@@ -118,7 +119,7 @@ The sorting order can also be defined like this:
     primaryKeyConstraint.AddColumn(lastName, ColumnSort.DESC);
     table.Constraints.Add(primaryKeyConstraint);
 ```
-# SQL FOREIGN KEY Constraint
+## SQL FOREIGN KEY Constraint
 A FOREIGN KEY is a key used to link two tables together.
 A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table.
 ```csharp
@@ -142,7 +143,7 @@ A FOREIGN KEY is a field (or collection of fields) in one table that refers to t
         .AddReferenceColumn(id);
     OrdersTable.Constraints.Add(foreignKeyConstraint);
 ```
-# SQL UNIQUE Constraint
+## SQL UNIQUE Constraint
 The UNIQUE constraint ensures that all values in a column are different.
 Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
 A PRIMARY KEY constraint automatically has a UNIQUE constraint.
@@ -186,7 +187,7 @@ The sorting order can also be defined like this:
     uniqueConstraint.AddColumn(lastName, ColumnSort.DESC);
     table.Constraints.Add(uniqueConstraint);
 ```
-# SQL CHECK Constraint
+## SQL CHECK Constraint
 The CHECK constraint is used to limit the value range that can be placed in a column.
 ```csharp
     Table table = new Table("Persons");
@@ -222,7 +223,7 @@ For even more complex expressions:
         CheckExpression = new CheckExpression("(City IN ('Sealttle','Kansas City','Dallas') OR UPPER(FirstName) LIKE 'J%') AND Address IS NOT NULL")
     };
 ```
-# SQL DEFAULT Contraint
+## SQL DEFAULT Contraint
 The DEFAULT constraint is used to provide a default value for a column. The default value will be added to all new records IF no other value is specified.
 To add a DEFAULT contraint use:
 ```csharp
@@ -243,7 +244,17 @@ The DEFAULT constraint can also be used to insert system values, by using functi
 ```csharp
     Column date = new Column("Date", DataType.Date()) { Default = new Default("GETDATE()") }
 ```
-# SQL CREATE INDEX
+## SQL Collation
+Defines a collation of a database table column. Collation name can be either a Windows collation name or a SQL collation name. If not specified during table column creation, the column is assigned the default collation of the database.
+```csharp
+    Table table = new Table("Persons");
+    Column id = new Column("Id", DataType.Int());
+    Column lastName = new Column("LastName", DataType.VarChar(255)) { Collation = "Latin1_General_CS_AS_KS_WS" };
+    Column firstName = new Column("FirstName", DataType.VarChar(255)) { Collation = "Traditional_Spanish_ci_ai" };
+    Column age = new Column("Age", DataType.Int()) { Default = new Default(18) };
+    table.Columns.AddAll(id, lastName, firstName, age);
+```
+## SQL CREATE INDEX
 The CREATE INDEX statement is used to create indexes in tables.
 ```csharp
     Index index = new Index("IndexName", table, column1, column2);
@@ -265,4 +276,66 @@ To create a clustered and/or unique index
 To set column sort orders
 ```csharp
     Index index = new Index("IndexName", table, Tuple.Create(column1, ColumnSort.DESC));
+```
+# Always Encrypted
+## CREATE COLUMN MASTER KEY
+Creates a column master key metadata object in a database. A column master key metadata entry represents a key, stored in an external key store. The key protects (encrypts) column encryption keys when you're using Always Encrypted
+```csharp
+    ColumnMasterKey columnMasterKey = new ColumnMasterKey(
+        keyName: "MyMasterKey", 
+        keyStoreProviderName: KeyStoreProvider.WindowsCertificateStoreProvider, 
+        keyPath: "CurrentUser/My/BBF037EC4A133ADCA89FFAEC16CA5BFA8878FB94"
+    );
+
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
+    {
+        sqlConnection.Open();
+        columnMasterKey.Create(sqlConnection);
+    }
+```
+## CREATE COLUMN ENCRYPTION KEY
+Creates a column encryption key metadata object for Always Encrypted. A column encryption key metadata object contains  the encrypted value of a column encryption key that is used to encrypt data in a column. Each value is encrypted using a column master key.
+```csharp
+    ColumnEncryptionKey columnEncryptionKey = new ColumnEncryptionKey(
+        keyName: myColumnEncryptionKeyName, 
+        columnMasterKeyName: myColumnMasterKeyName,
+        encryptedValue: "0x0123456789ABCDEF"
+    );
+
+    using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+    {
+        sqlConnection.Open();
+        columnEncryptionKey.Create(sqlConnection);
+    }
+```
+
+## SQL Column Encryption
+Specifies encrypting columns by using the Always Encrypted feature.
+```csharp
+    ColumnMasterKey columnMasterKey = new ColumnMasterKey("myColumnMasterKey", KeyStoreProvider.AzureKeyVaultProvider, "https://myvault.vault.azure.net:443/keys/MyCMK");
+    ColumnEncryptionKey columnEncryptionKey = new ColumnEncryptionKey("myColumnEncryptionKey", columnMasterKey.Name, "0x0123456789ABCDEF");
+
+    ColumnEncryption column1Encryption = new ColumnEncryption(columnEncryptionKey, ColumnEncryptionType.Deterministic);
+    Column column1 = new Column("myColumn1", DataType.Char())
+    {
+        ColumnEncryption = column1Encryption,
+        Collation = "Latin1_General_BIN2" // A BIN2 collation is required for deterministic encryption
+    };
+
+    ColumnEncryption column2Encryption = new ColumnEncryption(columnEncryptionKey, ColumnEncryptionType.Randomized);
+    Column column2 = new Column("myColumn2", DataType.NVarChar())
+    {
+        ColumnEncryption = column2Encryption
+    };
+
+    Table table = new Table("myTable");
+    table.Columns.AddAll(column1, column2);
+
+    using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
+    {
+        sqlConnection.Open();
+        columnMasterKey.Create(sqlConnection);
+        columnEncryptionKey.Create(sqlConnection);
+        table.Create(sqlConnection);
+    }
 ```
