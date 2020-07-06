@@ -1,5 +1,4 @@
-﻿using System;
-namespace Xtrimmer.SqlDatabaseBuilder
+﻿namespace Xtrimmer.SqlDatabaseBuilder
 {
     public class Default : DatabaseObject
     {
