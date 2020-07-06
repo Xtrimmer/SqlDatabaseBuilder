@@ -7,7 +7,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class PrimaryKeyConstraintShould
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
 
         [Fact]
         public void CreateTableWithSingleColumnPrimaryKey()
@@ -22,7 +22,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             primaryKeyConstraint.AddColumn(column);
             table.Constraints.Add(primaryKeyConstraint);
 
-            VerifyPrimaryKey(ColumnName, TableName, table);
+            VerifyPrimaryKey(TableName, table);
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             primaryKeyConstraint.AddColumns(column2);
             table.Constraints.Add(primaryKeyConstraint);
 
-            VerifyPrimaryKey(ColumnName1, TableName, table);
+            VerifyPrimaryKey(TableName, table);
         }
 
         [Fact]
@@ -65,10 +65,10 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             );
             table.Constraints.Add(primaryKeyConstraint);
 
-            VerifyPrimaryKey(ColumnName1, TableName, table);
+            VerifyPrimaryKey(TableName, table);
         }
 
-        private void VerifyPrimaryKey(string COLUMN_NAME, string tableName, Table table)
+        private void VerifyPrimaryKey(string tableName, Table table)
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {

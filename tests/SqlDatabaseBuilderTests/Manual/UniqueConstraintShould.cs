@@ -7,7 +7,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class UniqueConstraintShould
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
 
         [Fact]
         public void CreateSingleColumnUniqueConstraint()

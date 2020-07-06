@@ -8,8 +8,8 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class IndexShould : IClassFixture<IndexFixture>
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
-        private IndexFixture fixture;
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly IndexFixture fixture;
 
         public IndexShould(IndexFixture fixture)
         {
@@ -33,9 +33,11 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             table.Columns.ForEach(c =>
             {
                 indexColumns.Add(Tuple.Create(c, columnSort));
-                Index index = new Index(indexName, table, indexColumns.ToArray());
-                index.IsUnique = isUnique;
-                index.IndexType = indexType;
+                Index index = new Index(indexName, table, indexColumns.ToArray())
+                {
+                    IsUnique = isUnique,
+                    IndexType = indexType
+                };
 
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
@@ -83,9 +85,9 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
         }
     }
 
-    public class IndexFixture : IDisposable
+    public sealed class IndexFixture : IDisposable
     {
-        private string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
         public Table table;
 
         public IndexFixture()
