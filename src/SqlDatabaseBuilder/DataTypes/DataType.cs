@@ -34,6 +34,7 @@
         public static DataType NChar(int n) => new NChar(n);
         public static DataType Date() => new Date();
         public static DataType DateTime() => new DateTime();
+        public static DataType SmallDateTime() => new SmallDateTime();
         public static DataType DateTime2() => new DateTime2();
         public static DataType DateTime2(int scale) => new DateTime2(scale);
         public static DataType DateTimeOffset() => new DateTimeOffset();
