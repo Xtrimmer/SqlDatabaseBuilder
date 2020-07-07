@@ -19,10 +19,5 @@
         }
 
         protected ScaledTemporal() { }
-
-        protected ScaledTemporal(int scale)
-        {
-            Scale = scale;
-        }
     }
 }
