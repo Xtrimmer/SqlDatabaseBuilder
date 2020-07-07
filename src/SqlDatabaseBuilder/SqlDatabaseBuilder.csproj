@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>1.1.0</PackageVersion>
     <PackageId>SqlDatabaseBuilder</PackageId>
     <Authors>Jeff Trimmer,Mauricio Beithia</Authors>
     <Owners>Jeff Trimmer</Owners>
@@ -16,10 +15,8 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>- Added Collation support for table columns.
-  - Added Always Encrypted Column Master Key and Column Encryption Key definitions.
-  - Added Column Encryption support for table columns.
-  - Made DatabaseObjectCollection Enumerable.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Upgraded from System.Data.SqlClient to Microsoft.Data.SqlClient.</PackageReleaseNotes>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
