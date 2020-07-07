@@ -5,16 +5,16 @@ using System.Linq;
 
 namespace Xtrimmer.SqlDatabaseBuilder
 {
-    public class Index : DatabaseResource
+    public class TableIndex : DatabaseResource
     {
         private readonly Table table;
         private readonly List<Tuple<Column, ColumnSort>> columns = new List<Tuple<Column, ColumnSort>>();
 
-        public Index(string name, Table table, params Column[] columns) :
+        public TableIndex(string name, Table table, params Column[] columns) :
             this(name, table, columns.Select(c => Tuple.Create(c, ColumnSort.ASC)).ToArray())
         { }
 
-        public Index(string name, Table table, params Tuple<Column, ColumnSort>[] columns) : base(name)
+        public TableIndex(string name, Table table, params Tuple<Column, ColumnSort>[] columns) : base(name)
         {
             name.ThrowIfNull(nameof(name));
             table.ThrowIfNull(nameof(table));
