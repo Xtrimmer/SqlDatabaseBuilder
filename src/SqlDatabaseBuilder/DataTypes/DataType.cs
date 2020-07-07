@@ -35,7 +35,9 @@
         public static DataType Date() => new Date();
         public static DataType DateTime() => new DateTime();
         public static DataType DateTime2() => new DateTime2();
-        public static DataType DateTime2(int precision) => new DateTime2(precision);
+        public static DataType DateTime2(int scale) => new DateTime2(scale);
+        public static DataType DateTimeOffset() => new DateTimeOffset();
+        public static DataType DateTimeOffset(int scale) => new DateTimeOffset(scale);
         public static DataType Time() => new Time();
         public static DataType Time(int scale) => new Time(scale);
         public static DataType UniqueIdentifier() => new UniqueIdentifier();

@@ -1,10 +1,10 @@
 ﻿namespace Xtrimmer.SqlDatabaseBuilder
 {
-    internal class Time : ScaledTemporal
+    class DateTimeOffset : ScaledTemporal
     {
-        internal Time() { }
+        internal DateTimeOffset() { }
 
-        internal Time(int scale)
+        internal DateTimeOffset(int scale)
         {
             Scale = scale;
         }
@@ -14,7 +14,7 @@
             get
             {
                 string scaleSpecification = Scale == DefalutScale ? "" : $"({Scale})";
-                return $"time{scaleSpecification}";
+                return $"datetimeoffset{scaleSpecification}";
             }
         }
 
@@ -25,11 +25,11 @@
                 switch (Scale)
                 {
                     case int n when (n <= 2):
-                        return 3;
+                        return 8;
                     case int n when (n <= 4):
-                        return 4;
+                        return 9;
                     case int n when (n <= MaxScale):
-                        return 5;
+                        return 10;
                     default:
                         return 0;
                 }

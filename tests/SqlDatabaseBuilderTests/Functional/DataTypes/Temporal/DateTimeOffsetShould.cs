@@ -3,40 +3,40 @@ using Xunit;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
 {
-    public class DateTime2Should
+    public class DateTimeOffsetShould
     {
         [Fact]
         public void ReturnCorrectDefinitionWithoutPrecision()
         {
-            DataType dataType = DataType.DateTime2();
-            Assert.Equal("datetime2", dataType.Definition);
+            DataType dataType = DataType.DateTimeOffset();
+            Assert.Equal("datetimeoffset", dataType.Definition);
         }
 
         [Theory]
         [ClassData(typeof(ValidScaledTemporalScaleValues))]
         public void ReturnCorrectDefinitionWithPrecision(int precision)
         {
-            DataType dataType = DataType.DateTime2(precision);
-            string expectedDefinition = precision == 7 ? "datetime2" : $"datetime2({precision})";
+            DataType dataType = DataType.DateTimeOffset(precision);
+            string expectedDefinition = precision == 7 ? "datetimeoffset" : $"datetimeoffset({precision})";
             Assert.Equal(expectedDefinition, dataType.Definition);
         }
 
         [Fact]
         public void ReturnCorrectSizeWithoutPrecision()
         {
-            DataType dataType = DataType.DateTime2();
-            Assert.Equal(8, dataType.Size);
+            DataType dataType = DataType.DateTimeOffset();
+            Assert.Equal(10, dataType.Size);
         }
 
         [Theory]
         [ClassData(typeof(ValidScaledTemporalScaleValues))]
         public void ReturnCorrectSizeWithPrecision(int precision)
         {
-            DataType dataType = DataType.DateTime2(precision);
+            DataType dataType = DataType.DateTimeOffset(precision);
             int expectedSize;
-            if (precision < 3) expectedSize = 6;
-            else if (precision < 5) expectedSize = 7;
-            else expectedSize = 8;
+            if (precision < 3) expectedSize = 8;
+            else if (precision < 5) expectedSize = 9;
+            else expectedSize = 10;
             Assert.Equal(expectedSize, dataType.Size);
         }
 
@@ -44,7 +44,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
         [InvalidScaledTemporalScaleValues]
         public void ThrowInvalidScaleException(int precision)
         {
-            Assert.Throws<InvalidScaleException>(() => DataType.DateTime2(precision));
+            Assert.Throws<InvalidScaleException>(() => DataType.DateTimeOffset(precision));
         }
     }
 }
