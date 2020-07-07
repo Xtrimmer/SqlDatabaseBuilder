@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xtrimmer.SqlDatabaseBuilder;
+﻿using Xtrimmer.SqlDatabaseBuilder;
 using Xunit;
 
 namespace Xtrimmer.SqlDatabaseBuilderTests.Functional
