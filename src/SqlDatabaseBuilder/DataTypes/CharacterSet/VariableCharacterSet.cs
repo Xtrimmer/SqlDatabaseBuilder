@@ -9,7 +9,7 @@
         {
             get
             {
-                string nDefinition = n == 1 ? "" : $"({n.ToString()})";
+                string nDefinition = n == 1 ? "" : $"({n})";
                 return isMax ? "(max)" : nDefinition;
             }
         }
