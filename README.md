@@ -257,7 +257,7 @@ Defines a collation of a database table column. Collation name can be either a W
 ## SQL CREATE INDEX
 The CREATE INDEX statement is used to create indexes in tables.
 ```csharp
-    Index index = new Index("IndexName", table, column1, column2);
+    TableIndex index = new TableIndex("IndexName", table, column1, column2);
 
     using (SqlConnection sqlConnection = new SqlConnection("Server=myServerAddress;Database=myDataBase;"))
     {
@@ -267,7 +267,7 @@ The CREATE INDEX statement is used to create indexes in tables.
 ```
 To create a clustered and/or unique index
 ```csharp
-    Index index = new Index("IndexName", table, column1, column2)
+    TableIndex index = new TableIndex("IndexName", table, column1, column2)
     {
         IndexType = IndexType.CLUSTERED,
         IsUnique = true
@@ -275,7 +275,7 @@ To create a clustered and/or unique index
 ```
 To set column sort orders
 ```csharp
-    Index index = new Index("IndexName", table, Tuple.Create(column1, ColumnSort.DESC));
+    TableIndex index = new TableIndex("IndexName", table, Tuple.Create(column1, ColumnSort.DESC));
 ```
 # Always Encrypted
 ## CREATE COLUMN MASTER KEY
