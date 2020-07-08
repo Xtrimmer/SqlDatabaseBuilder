@@ -28,6 +28,28 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                 columnEncryptionKey.Create(sqlConnection);
                 Assert.True(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection), "ColumnMasterKey should exist in the database.");
                 Assert.True(columnEncryptionKey.IsColumnEncryptionKeyPresentInDatabase(sqlConnection), "ColumnEncryptionKey should exist in the database.");
+
+                using (SqlCommand command = sqlConnection.CreateCommand())
+                {
+                    command.CommandText = $@"
+                        SELECT cmk.name, v.encrypted_value 
+                        FROM sys.column_encryption_keys cek JOIN sys.column_encryption_key_values v 
+                        ON (cek.column_encryption_key_id = v.column_encryption_key_id)
+                        JOIN sys.column_master_keys cmk 
+                        ON (cmk.column_master_key_id = v.column_master_key_id)
+                        WHERE cek.name = 'CreateAndDropColumnEncryptionKey'";
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        Assert.True(reader.HasRows, "The sql query should have returned at least one row.");
+                        while (reader.Read())
+                        {
+                            Assert.Equal(columnEncryptionKey.ColumnMasterKeyName, reader.GetString(0));
+                            Assert.NotNull(reader.GetValue(1));
+                        }
+                    }
+                }
+
                 columnEncryptionKey.Drop(sqlConnection);
                 columnMasterKey.Drop(sqlConnection);
                 Assert.False(columnMasterKey.IsColumnMasterKeyPresentInDatabase(sqlConnection), "ColumnMasterKey should not exist in the database.");

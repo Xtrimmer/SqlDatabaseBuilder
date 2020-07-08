@@ -231,8 +231,8 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                         { 
                             while (reader.Read())
                             {
-                                Assert.Equal(reader.GetString(0), column.ColumnEncryption.ColumnEncryptionType.GetStringValue());
-                                Assert.Equal(reader.GetString(1), column.ColumnEncryption.ColumnEncryptionKeyName);
+                                Assert.Equal(column.ColumnEncryption.ColumnEncryptionType.GetStringValue(), reader.GetString(0));
+                                Assert.Equal(column.ColumnEncryption.ColumnEncryptionKeyName, reader.GetString(1));
                             }
                         }
                     }

@@ -44,7 +44,7 @@ namespace Xtrimmer.SqlDatabaseBuilder
             get
             {
                 string enclaveComputations = IsEnclaveEnabled ? $", ENCLAVE_COMPUTATIONS (SIGNATURE = {Signature})" : "";
-                return $"CREATE COLUMN MASTER KEY [{Name}] WITH(KEY_STORE_PROVIDER_NAME = '{KeyStoreProviderName}', KEY_PATH = '{KeyPath}{enclaveComputations}');";
+                return $"CREATE COLUMN MASTER KEY [{Name}] WITH(KEY_STORE_PROVIDER_NAME = '{KeyStoreProviderName}', KEY_PATH = '{KeyPath}'{enclaveComputations});";
             }
         }
     }
