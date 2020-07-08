@@ -96,9 +96,9 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection), "The table should not be present in the database.");
                 table.Create(sqlConnection);
-                Assert.True(table.IsTablePresentInDatabase(sqlConnection));
+                Assert.True(table.IsTablePresentInDatabase(sqlConnection), "The table should be present in the database.");
 
                 using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
                 {
@@ -116,6 +116,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                     using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                     {
                         int index = 0;
+                        Assert.True(sqlDataReader.HasRows, "The sql query should have returned at least one row.");
                         while (sqlDataReader.Read())
                         {
                             string s = sqlDataReader.GetString(0);
@@ -125,7 +126,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
                 }
 
                 table.Drop(sqlConnection);
-                Assert.False(table.IsTablePresentInDatabase(sqlConnection));
+                Assert.False(table.IsTablePresentInDatabase(sqlConnection), "The table should not be present in the database.");
             }
         }
     }
