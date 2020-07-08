@@ -15,9 +15,9 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Added datetimeoffset and smalldatetime data types.
-Changed Index to TableIndex to prevent collisions with System.Index.</PackageReleaseNotes>
-    <Version>3.0.0</Version>
+    <PackageReleaseNotes>Fixed a bug that prevented the Enclave Enabled Column Master Key from being created correctly.
+Improved test scenarios.</PackageReleaseNotes>
+    <Version>3.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
