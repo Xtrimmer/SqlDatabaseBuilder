@@ -15,9 +15,8 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Fixed a bug that prevented the Enclave Enabled Column Master Key from being created correctly.
-Improved test scenarios.</PackageReleaseNotes>
-    <Version>3.0.1</Version>
+    <PackageReleaseNotes>Add aditional target for net46 for older program support.</PackageReleaseNotes>
+    <Version>3.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
