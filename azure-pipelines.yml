@@ -26,7 +26,7 @@ steps:
     SonarCloud: 'SonarCloud'
     organization: 'xtrimmer-github'
     scannerMode: 'MSBuild'
-    projectKey: 'Xtrimmer_SqlDatabaseBuilder'
+    projectKey: 'SqlDatabaseBuilder'
     projectName: 'SqlDatabaseBuilder'
 
 - task: VSBuild@1
