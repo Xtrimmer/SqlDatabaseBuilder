@@ -9,16 +9,13 @@
     <Description>SqlDatabaseBuilder is a lightweight library used to add and remove database resources in a Sql Server database from within a C# application.</Description>
     <PackageTags>SqlServer;Database;SQL;</PackageTags>
     <RepositoryUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</RepositoryUrl>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSource>true</IncludeSource>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Sign an assembly with a strong name.</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Version>3.1.1</Version>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SigningKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +23,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="License/LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
 
   <ItemGroup>

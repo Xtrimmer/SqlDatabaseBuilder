@@ -14,7 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{74DBA598-77E8-4D09-990A-36980DAF1C69}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		.travis.yml = .travis.yml
+		azure-pipelines.yml = azure-pipelines.yml
 		icon.png = icon.png
 		NuGet.Config = NuGet.Config
 		README.md = README.md

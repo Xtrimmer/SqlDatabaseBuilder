@@ -1,24 +1,21 @@
-[![Build Status](https://travis-ci.com/Xtrimmer/SqlDatabaseBuilder.svg?branch=master)](https://travis-ci.com/Xtrimmer/SqlDatabaseBuilder)
-[![NuGet Version](https://badge.fury.io/nu/SqlDatabaseBuilder.svg)](https://badge.fury.io/nu/SqlDatabaseBuilder)
+
+[![Build Status](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_apis/build/status/Xtrimmer.SqlDatabaseBuilder?branchName=master)](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_build/latest?definitionId=4&branchName=master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=alert_status)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
-# Xtrimmer SqlDatabaseBuilder
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)  
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=bugs)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=code_smells)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=security_rating)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)  
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=ncloc)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
 
-Contributors:
-  - Jeff Trimmer
-  - Mauricio Beithia
+# SqlDatabaseBuilder
   
-Xtrimmer SqlDatabaseBuilder is a simple library designed to help you build a Sql Server database using C#.
+SqlDatabaseBuilder is a simple library designed to help you build a Sql Server database 
+resources using C#. This is useful for setting up and tearing down database objects for software testing.
 
-  - Write some SqlDatabaseBuilder code
-  - Connect to a Sql Server Database server
-  - Magic
-
-# New Features!
-
-  - Added Collation support for table columns.
-  - Added Always Encrypted Column Master Key, Column Encryption Key definitions.
-  - Added Column Encryption support for table columns
 # Database Basics
 ## SQL CREATE DATABASE
 The DATABASE object is used to create a new SQL database.
