@@ -13,7 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  projectFolder: '$(Agent.BuildDirectory)\src\SqlDatabaseBuilder'
+  projectFolder: '$(Agent.BuildDirectory)/src/SqlDatabaseBuilder'
 
 steps:
 
