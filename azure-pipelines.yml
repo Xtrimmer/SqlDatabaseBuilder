@@ -16,14 +16,23 @@ variables:
 
 steps:
 
+- task: DownloadSecureFile@1
+  name: strongNameSigningCert
+  inputs:
+    secureFile: SqlDatabaseBuilder.snk
+    retryCount: 5
+
 - task: PowerShell@2
   env:
     AzureSqlServerPath: $(AzureSqlServerPath)
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host "Setting AzureSqlServerPath: $(AzureSqlServerPath)"
+      Write-Host "Setting connection string to environmentVariable 'AzureSqlServerPath'..."
       [Environment]::SetEnvironmentVariable("AzureSqlServerPath", "$(AzureSqlServerPath)", "User")
+      Write-Host "Copying strong name signing certificate to project directory '$(Agent.BuildDirectory)'..."
+      Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(Agent.BuildDirectory)
+      
 
 - task: NuGetToolInstaller@1
 

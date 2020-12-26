@@ -1,5 +1,5 @@
 
-[![Build Status](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_apis/build/status/Xtrimmer.SqlDatabaseBuilder?branchName=master)](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_build/latest?definitionId=4&branchName=master)
+[![Build Status](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_apis/build/status/Xtrimmer.SqlDatabaseBuilder?branchName=master)](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_build/latest?definitionId=5&branchName=master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=alert_status)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)  
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)

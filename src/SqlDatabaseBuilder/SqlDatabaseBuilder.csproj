@@ -17,6 +17,11 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <Version>3.1.1</Version>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SqlDatabaseBuilder.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\icon.png">
