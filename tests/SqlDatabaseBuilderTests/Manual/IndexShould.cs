@@ -8,7 +8,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class IndexShould : IClassFixture<IndexFixture>
     {
-        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath", EnvironmentVariableTarget.User);
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
         private readonly IndexFixture fixture;
 
         public IndexShould(IndexFixture fixture)
@@ -87,7 +87,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 
     public sealed class IndexFixture : IDisposable
     {
-        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath", EnvironmentVariableTarget.User);
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
         public Table table;
 
         public IndexFixture()
