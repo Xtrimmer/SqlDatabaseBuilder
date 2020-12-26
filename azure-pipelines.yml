@@ -23,7 +23,7 @@ steps:
     targetType: 'inline'
     script: |
       Write-Host "Setting AzureSqlServerPath: $(AzureSqlServerPath)"
-      [Environment]::SetEnvironmentVariable("AzureSqlServerPath", "$(AzureSqlServerPath)")
+      [Environment]::SetEnvironmentVariable("AzureSqlServerPath", "$(AzureSqlServerPath)", "User")
 
 - task: NuGetToolInstaller@1
 

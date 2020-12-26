@@ -9,7 +9,7 @@ namespace Xtrimmer.SqlDatabaseBuilderTests.Manual
 {
     public class ColumnShould
     {
-        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath");
+        private readonly string connectionString = Environment.GetEnvironmentVariable("AzureSqlServerPath", EnvironmentVariableTarget.User);
 
         [Fact]
         public void DefineDataTypesCorrectly()
