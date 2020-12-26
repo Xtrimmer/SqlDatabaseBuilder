@@ -13,6 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  projectFolder: '$(Agent.BuildDirectory)\src\SqlDatabaseBuilder'
 
 steps:
 
@@ -28,11 +29,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host "Setting connection string to environmentVariable 'AzureSqlServerPath'..."
+      Write-Host "Setting connection string to user environmentVariable 'AzureSqlServerPath'..."
       [Environment]::SetEnvironmentVariable("AzureSqlServerPath", "$(AzureSqlServerPath)", "User")
-      Write-Host "Copying strong name signing certificate to project directory '$(Agent.BuildDirectory)'..."
-      Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(Agent.BuildDirectory)
-      
+      Write-Host "Copying strong name signing certificate to project directory '$(projectFolder)'..."
+      Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(projectFolder)
 
 - task: NuGetToolInstaller@1
 
