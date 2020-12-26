@@ -30,8 +30,8 @@ steps:
     script: |
       Write-Host "Setting connection string to environmentVariable 'AzureSqlServerPath'..."
       [Environment]::SetEnvironmentVariable("AzureSqlServerPath", "$(AzureSqlServerPath)", "User")
-      Write-Host "Copying strong name signing certificate to project directory '$(Agent.BuildDirectory)'..."
-      Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(Agent.BuildDirectory)
+      Write-Host "Copying strong name signing certificate to project directory '$(Build.Repository.LocalPath)'..."
+      Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(Build.Repository.LocalPath)
       
 
 - task: NuGetToolInstaller@1
