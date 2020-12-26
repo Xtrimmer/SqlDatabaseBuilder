@@ -17,11 +17,11 @@ variables:
 steps:
 
 - task: PowerShell@2
+  env:
+    AzureSqlServerPath: $(AzureSqlServerPath)
   inputs:
     targetType: 'inline'
-    script: |
-      Write-Host ${env:AZURESQLSERVERPATH}
-      [Environment]::SetEnvironmentVariable("AzureSqlServerPath", ${env:AZURESQLSERVERPATH})
+    script: 'Write-Host "Setting AzureSqlServerPath: $(AzureSqlServerPath)"'
 
 - task: NuGetToolInstaller@1
 
