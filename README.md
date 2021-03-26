@@ -1,4 +1,4 @@
-![Nuget](https://img.shields.io/nuget/v/SqlDatabaseBuilder)
+[![Nuget](https://img.shields.io/nuget/v/SqlDatabaseBuilder)](https://www.nuget.org/packages/SqlDatabaseBuilder/)
 [![Build Status](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_apis/build/status/Xtrimmer.SqlDatabaseBuilder?branchName=master)](https://dev.azure.com/Xtrimmer/SqlDatabaseBuilder/_build/latest?definitionId=5&branchName=master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=alert_status)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SqlDatabaseBuilder&metric=coverage)](https://sonarcloud.io/dashboard?id=SqlDatabaseBuilder)  
