@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
     <PackageId>SqlDatabaseBuilder</PackageId>
     <Authors>Jeff Trimmer,Mauricio Beithia</Authors>
     <Owners>Jeff Trimmer</Owners>
@@ -14,8 +14,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/Xtrimmer/SqlDatabaseBuilder</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <Version>3.1.1</Version>
+    <PackageReleaseNotes>Moves to Microsoft.Data.SqlClient 6.1.6, which clears CVE-2024-0056 and CVE-2022-41064 and drops the System.Runtime.Caching dependency chain that carried a critical System.Drawing.Common advisory. This raises the minimum .NET Framework target from 4.6 to 4.6.2, so projects on net46 or net461 need to move to net462 or later.</PackageReleaseNotes>
+    <Version>4.0.0</Version>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.7" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.6" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>
 
