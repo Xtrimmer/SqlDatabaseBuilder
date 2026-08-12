@@ -1,0 +1,35 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    # The test project keeps a net472 leg, which needs MSBuild on Windows.
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore SqlDatabaseBuilder.sln
+
+      # Debug only. The Release configuration strong-name signs against
+      # SqlDatabaseBuilder.snk, which is not in the repository -- the Azure
+      # Pipelines build pulls it in as a secure file.
+      - name: Build
+        run: dotnet build SqlDatabaseBuilder.sln --configuration Debug --no-restore
+
+      # Tests are deliberately not run here. Every fixture under tests/ reads a
+      # connection string from the AzureSqlServerPath environment variable and
+      # talks to a live SQL Server, so there is nothing meaningful to execute
+      # without provisioning a database. This workflow verifies that the
+      # solution restores and compiles.
